@@ -242,14 +242,17 @@ app.use('/api/public', require('./routes/public-routes/plan.routes'));
 app.use('/api/public', require('./routes/public-routes/config.routes'));
 
 // 404 handler
-app.use((req, res) => {
-  console.log(`[404 HANDLER] Route not found - Method: ${req.method}, Path: ${req.path}, OriginalUrl: ${req.originalUrl}`);
-  res.status(404).json({
-    success: false,
-    message: 'Route not found',
-    method: req.method,
-    path: req.path
-  });
+app.use((req, res, next) => {
+  if (req.originalUrl.startsWith('/api/') || req.originalUrl === '/api') {
+    console.log(`[404 HANDLER] API Route not found - Method: ${req.method}, Path: ${req.path}, OriginalUrl: ${req.originalUrl}`);
+    return res.status(404).json({
+      success: false,
+      message: 'Route not found',
+      method: req.method,
+      path: req.path
+    });
+  }
+  next();
 });
 
 // Error handling middleware
