@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiPlus, FiMapPin, FiClock, FiCheckCircle, FiBell, FiArrowLeft, FiTrash2, FiCamera, FiX, FiLoader, FiImage } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
+import { optimizeCloudinaryUrl } from '../../../../utils/cloudinaryOptimize';
 import api from '../../../../services/api';
 import { AnimatePresence, motion } from 'framer-motion';
 import BottomNav from '../../components/layout/BottomNav';
@@ -172,7 +173,7 @@ const UserScrapPage = () => {
                 <div className="flex gap-4">
                   {item.images && item.images.length > 0 && (
                     <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0 border border-gray-50 bg-gray-50/50">
-                      <img src={item.images[0]} alt={item.title} className="w-full h-full object-cover" />
+                      <img src={optimizeCloudinaryUrl(item.images[0], { width: 200, quality: 'auto' })} alt={item.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                     </div>
                   )}
                   <div className="flex-1">
@@ -273,7 +274,7 @@ const UserScrapPage = () => {
                     <div className="grid grid-cols-2 gap-3">
                       {selectedScrap.images.map((img, i) => (
                         <div key={i} className={`rounded-3xl overflow-hidden border border-gray-100 ${i === 0 && selectedScrap.images.length % 2 !== 0 ? 'col-span-2 aspect-video' : 'aspect-square'}`}>
-                          <img src={img} alt="Scrap" className="w-full h-full object-cover" />
+                          <img src={optimizeCloudinaryUrl(img, { width: 400, quality: 'auto' })} alt="Scrap" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                         </div>
                       ))}
                     </div>

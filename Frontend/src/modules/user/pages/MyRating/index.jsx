@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiStar, FiUser, FiBriefcase, FiCalendar, FiMessageSquare, FiLoader } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
+import { optimizeCloudinaryUrl } from '../../../../utils/cloudinaryOptimize';
 import bookingService from '../../../../services/bookingService';
 
 const MyRating = () => {
@@ -75,7 +76,7 @@ const MyRating = () => {
                   <div className="flex gap-3">
                     <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center overflow-hidden border border-blue-100/50">
                       {rating.vendorId?.profilePhoto ? (
-                        <img src={rating.vendorId.profilePhoto} alt={rating.vendorId.name} className="w-full h-full object-cover" />
+                        <img src={optimizeCloudinaryUrl(rating.vendorId.profilePhoto, { width: 120, quality: 'auto' })} alt={rating.vendorId.name} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                       ) : (
                         <FiUser className="w-6 h-6 text-blue-400" />
                       )}
@@ -109,7 +110,7 @@ const MyRating = () => {
                 {rating.reviewImages && rating.reviewImages.length > 0 && (
                   <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
                     {rating.reviewImages.map((img, i) => (
-                      <img key={i} src={img} className="w-20 h-20 rounded-2xl object-cover shrink-0 border border-gray-100" alt="Review" />
+                      <img key={i} src={optimizeCloudinaryUrl(img, { width: 200, quality: 'auto' })} className="w-20 h-20 rounded-2xl object-cover shrink-0 border border-gray-100" alt="Review" loading="lazy" decoding="async" />
                     ))}
                   </div>
                 )}

@@ -1099,7 +1099,7 @@ const BookingDetails = () => {
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center shrink-0 border border-teal-100 overflow-hidden">
                   {booking.categoryIcon ? (
-                    <img src={booking.categoryIcon} alt="" className="w-6 h-6 object-contain" />
+                    <img src={booking.categoryIcon} alt="" className="w-6 h-6 object-contain" loading="lazy" decoding="async" />
                   ) : (
                     <FiPackage className="w-5 h-5 text-teal-400" />
                   )}
@@ -1119,7 +1119,7 @@ const BookingDetails = () => {
                   <div className="flex items-center gap-3 pt-3 border-t border-dashed border-gray-100">
                     <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 overflow-hidden">
                       {brandIcon ? (
-                        <img src={brandIcon} alt={brandName} className="w-7 h-7 object-contain" />
+                        <img src={brandIcon} alt={brandName} className="w-7 h-7 object-contain" loading="lazy" decoding="async" />
                       ) : (
                         <span className="text-lg font-black text-slate-400">{brandName.charAt(0)}</span>
                       )}

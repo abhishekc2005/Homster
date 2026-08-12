@@ -1200,7 +1200,7 @@ const Checkout = () => {
                 {(brandName || categoryName) && (
                   <div className="flex items-center gap-2 mb-3 pb-3 border-b border-gray-50">
                     {item.sectionIcon ? (
-                      <img src={toAssetUrl(item.sectionIcon)} className="w-5 h-5 rounded-md object-cover border border-gray-100" alt="" />
+                      <img src={toAssetUrl(item.sectionIcon)} className="w-5 h-5 rounded-md object-cover border border-gray-100" alt="" loading="lazy" decoding="async" />
                     ) : (
                       <div className="w-5 h-5 rounded-md bg-gray-100 flex items-center justify-center text-[10px] font-bold text-gray-500">
                         {(brandName || "B").charAt(0)}

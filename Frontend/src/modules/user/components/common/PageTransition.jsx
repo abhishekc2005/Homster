@@ -1,43 +1,31 @@
-import React, { useEffect, useState, cloneElement } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 /**
- * PageTransition - Provides smooth page transitions without blocking navigation
- * Uses simple opacity fade for fast, non-intrusive page changes
+ * PageTransition - Provides smooth page transitions using Framer Motion
+ * Hardware-accelerated smooth fade & slide up for premium user experience
  */
 const PageTransition = ({ children }) => {
   const location = useLocation();
-  const [displayLocation, setDisplayLocation] = useState(location);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  useEffect(() => {
-    if (location.pathname !== displayLocation.pathname) {
-      // Start transition immediately
-      setIsTransitioning(true);
-
-      // Quick fade out then swap content
-      const timeout = setTimeout(() => {
-        setDisplayLocation(location);
-        setIsTransitioning(false);
-      }, 100); // Very quick transition (100ms)
-
-      return () => clearTimeout(timeout);
-    }
-  }, [location.pathname, displayLocation.pathname]);
 
   return (
-    <div
-      style={{
-        opacity: isTransitioning ? 0.7 : 1,
-        transition: 'opacity 100ms ease-out',
-        willChange: 'opacity',
-      }}
-    >
-      {cloneElement(children, { location: displayLocation })}
-    </div>
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+        className="w-full"
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
 export default PageTransition;
+
 
 

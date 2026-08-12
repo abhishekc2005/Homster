@@ -7,6 +7,7 @@ import { themeColors } from '../../../../../theme';
 import { publicCatalogService } from '../../../../../services/catalogService';
 import { useCart } from '../../../../../context/CartContext';
 import { toast } from 'react-hot-toast';
+import { optimizeCloudinaryUrl } from '../../../../../utils/cloudinaryOptimize';
 
 const toAssetUrl = (url) => {
   if (!url) return '';
@@ -263,10 +264,11 @@ const CategoryModal = React.memo(({ isOpen, onClose, category, location, cartCou
                                 <div className="w-20 h-20 bg-gray-50 rounded-2xl flex items-center justify-center mb-2 group-hover:bg-gray-100 transition-colors shadow-sm overflow-hidden border border-gray-100 relative">
                                   {brand.icon ? (
                                     <img
-                                      src={toAssetUrl(brand.icon)}
+                                      src={optimizeCloudinaryUrl(toAssetUrl(brand.icon), { width: 120, quality: 'auto' })}
                                       alt={brand.title}
                                       className="w-14 h-14 object-contain group-hover:scale-110 transition-transform"
                                       loading="lazy"
+                                      decoding="async"
                                     />
                                   ) : (
                                     <FiLayers className="w-8 h-8 text-gray-300" />
