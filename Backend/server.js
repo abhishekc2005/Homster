@@ -98,6 +98,9 @@ if (process.env.NODE_ENV === 'development') {
 // Rate limiting
 app.use('/api', rateLimiter);
 
+// Silence favicon 404s
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 // Health check route
 app.get('/health', (req, res) => {
   res.json({
