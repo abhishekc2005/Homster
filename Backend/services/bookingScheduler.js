@@ -60,7 +60,74 @@ class BookingScheduler {
     }
     this.isRunning = true;
     console.log('[BookingScheduler] Started — active interval: 5s, idle interval: 30s');
+
+    // Startup cleanup: cancel any bookings stuck in 'searching' that already expired
+    // (handles ghost bookings left over from before this fix was deployed)
+    this._cleanupExpiredSearching().catch(err => {
+      console.error('[BookingScheduler] Startup cleanup error:', err);
+    });
+
     this.scheduleNext(ACTIVE_INTERVAL_MS);
+  }
+
+  /**
+   * One-time cleanup on startup: find all 'searching' bookings that have already
+   * exceeded MAX_SEARCH_TIME_MS and immediately cancel them.
+   */
+  async _cleanupExpiredSearching() {
+    try {
+      const now = new Date();
+      const cutoff = new Date(now.getTime() - MAX_SEARCH_TIME_MS);
+
+      // Match bookings that started before the cutoff (already expired)
+      const stuck = await Booking.find({
+        status: BOOKING_STATUS.SEARCHING,
+        $or: [
+          { createdAt: { $lt: cutoff } },
+          { expiresAt: { $lt: now, $ne: null } }
+        ]
+      }, '_id bookingNumber userId notifiedVendors').lean();
+
+      if (stuck.length === 0) {
+        console.log('[BookingScheduler] Startup cleanup: no stuck bookings found.');
+        return;
+      }
+
+      console.log(`[BookingScheduler] Startup cleanup: cancelling ${stuck.length} stuck booking(s).`);
+
+      await Promise.all(stuck.map(async (booking) => {
+        try {
+          await Booking.findByIdAndUpdate(booking._id, {
+            $set: {
+              status: BOOKING_STATUS.NO_VENDORS,
+              cancellationReason: 'No vendor accepted within time limit',
+              waveStartedAt: null
+            }
+          });
+
+          // Notify the user their search failed
+          if (this.io) {
+            this.io.to(`user_${booking.userId}`).emit('booking_search_failed', {
+              bookingId: booking._id,
+              message: 'No vendors available at the moment. Please try again later.'
+            });
+          }
+
+          // Remove from notified vendors
+          if (booking.notifiedVendors && booking.notifiedVendors.length > 0) {
+            booking.notifiedVendors.forEach(vId => {
+              if (this.io) this.io.to(`vendor_${vId}`).emit('removeVendorBooking', { id: booking._id });
+            });
+          }
+
+          console.log(`[BookingScheduler] Startup cleanup: cancelled ${booking.bookingNumber}`);
+        } catch (err) {
+          console.error(`[BookingScheduler] Startup cleanup: failed for ${booking.bookingNumber}:`, err);
+        }
+      }));
+    } catch (err) {
+      console.error('[BookingScheduler] Startup cleanup query failed:', err);
+    }
   }
 
   scheduleNext(intervalMs) {
@@ -141,12 +208,17 @@ class BookingScheduler {
             if (totalElapsed > MAX_SEARCH_TIME_MS) {
               console.log(`[BookingScheduler] ${booking.bookingNumber}: Search timed out. Cancelling.`);
 
-              await Booking.findByIdAndUpdate(booking._id, {
-                $set: {
-                  status: BOOKING_STATUS.NO_VENDORS,
-                  cancellationReason: 'No vendor accepted within time limit'
-                }
-              });
+              try {
+                await Booking.findByIdAndUpdate(booking._id, {
+                  $set: {
+                    status: BOOKING_STATUS.NO_VENDORS,
+                    cancellationReason: 'No vendor accepted within time limit',
+                    waveStartedAt: null  // Drop from circuit-breaker query immediately
+                  }
+                });
+              } catch (cancelErr) {
+                console.error(`[BookingScheduler] ${booking.bookingNumber}: Failed to cancel timed-out booking:`, cancelErr);
+              }
 
               // Notify User
               if (this.io) {
