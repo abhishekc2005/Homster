@@ -163,7 +163,12 @@ const syncPlatformEarnings = async () => {
   }
 };
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://homecareofficialsolution:Admin123@cluster0.1tk4tkp.mongodb.net/Homster', {
+if (!process.env.MONGODB_URI) {
+  console.error('❌ MONGODB_URI environment variable is not set. Please create a .env file or set the variable.');
+  process.exit(1);
+}
+
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
