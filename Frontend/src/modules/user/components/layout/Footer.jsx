@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
+import { FaFacebook, FaInstagram, FaXTwitter, FaLinkedin } from 'react-icons/fa6';
 import Logo from '../../../../components/common/Logo';
 import { configService } from '../../../../services/configService';
 
@@ -84,15 +85,34 @@ const Footer = () => {
               {settings?.companyName || 'Homestr'} is your one-stop destination for all home services. From electrical repairs to premium salon services, we bring the experts to your doorstep.
             </p>
             <div className="flex items-center gap-4">
-              {[FiFacebook, FiTwitter, FiInstagram, FiLinkedin].map((Icon, i) => (
-                <a 
-                  key={i} 
-                  href="#" 
-                  className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#347989] hover:border-[#347989] hover:shadow-lg transition-all duration-300"
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))}
+              <a 
+                href="#" 
+                className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-300"
+                aria-label="Facebook"
+              >
+                <FaFacebook className="w-5 h-5" style={{ color: '#1877F2' }} />
+              </a>
+              <a 
+                href="#" 
+                className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-300"
+                aria-label="Instagram"
+              >
+                <FaInstagram className="w-5 h-5" style={{ color: '#E4405F' }} />
+              </a>
+              <a 
+                href="#" 
+                className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-300"
+                aria-label="Twitter"
+              >
+                <FaXTwitter className="w-5 h-5" style={{ color: '#000000' }} />
+              </a>
+              <a 
+                href="#" 
+                className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-300"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="w-5 h-5" style={{ color: '#0A66C2' }} />
+              </a>
             </div>
           </div>
 
