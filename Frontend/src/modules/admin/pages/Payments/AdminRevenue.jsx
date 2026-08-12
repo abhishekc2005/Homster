@@ -4,12 +4,12 @@ import {
   FiSearch,
   FiFilter,
   FiDownload,
-  FiDollarSign,
   FiRefreshCcw,
   FiTrendingUp,
   FiPieChart,
   FiActivity
 } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { adminTransactionService } from '../../../../services/adminTransactionService';
 import toast from 'react-hot-toast';
 import { exportToCSV } from '../../../../utils/csvExport';
@@ -148,7 +148,7 @@ const AdminRevenue = () => {
         >
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-green-50 rounded-xl">
-              <FiDollarSign className="w-6 h-6 text-green-600" />
+              <FaRupeeSign className="w-6 h-6 text-green-600" />
             </div>
           </div>
           <p className="text-gray-500 text-sm font-medium">Total Revenue</p>
@@ -261,7 +261,7 @@ const AdminRevenue = () => {
         ) : transactions.length === 0 ? (
           <div className="p-8 text-center flex flex-col items-center">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-              <FiDollarSign className="w-8 h-8 text-gray-400" />
+              <FaRupeeSign className="w-8 h-8 text-gray-400" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900">No revenue records found</h3>
             <p className="text-gray-500 mt-1">Transactions will appear here once bookings are completed.</p>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiDollarSign, FiArrowRight, FiCreditCard, FiAlertCircle, FiCheckCircle, FiEdit2, FiClock, FiPlusCircle, FiActivity } from 'react-icons/fi';
+import { FiArrowRight, FiCreditCard, FiAlertCircle, FiCheckCircle, FiEdit2, FiClock, FiPlusCircle, FiActivity } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { vendorTheme as themeColors } from '../../../../theme';
 import Header from '../../components/layout/Header';
 import BottomNav from '../../components/layout/BottomNav';
@@ -166,7 +167,7 @@ const WithdrawalRequest = () => {
           </div>
           {/* Decorative Icon Background */}
           <div className="absolute -bottom-6 -right-6 text-white/10 transform rotate-12">
-            <FiDollarSign className="w-40 h-40" />
+            <FaRupeeSign className="w-40 h-40" />
           </div>
         </div>
 
@@ -175,7 +176,7 @@ const WithdrawalRequest = () => {
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600">
-                <FiDollarSign className="w-5 h-5" />
+                <FaRupeeSign className="w-5 h-5" />
               </div>
               <h3 className="text-sm font-bold text-gray-800">Withdraw Amount</h3>
             </div>

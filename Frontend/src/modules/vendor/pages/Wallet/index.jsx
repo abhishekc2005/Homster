@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiDollarSign, FiArrowUp, FiArrowDown, FiArrowRight, FiClock, FiCheckCircle, FiAlertCircle, FiSend } from 'react-icons/fi';
+import { FiArrowUp, FiArrowDown, FiArrowRight, FiClock, FiCheckCircle, FiAlertCircle, FiSend } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { vendorTheme as themeColors } from '../../../../theme';
 import Header from '../../components/layout/Header';
 import BottomNav from '../../components/layout/BottomNav';
@@ -83,15 +84,15 @@ const Wallet = () => {
       case 'settlement':
         return <FiSend className="w-5 h-5 text-blue-500" />;
       case 'withdrawal':
-        return <FiDollarSign className="w-5 h-5 text-purple-500" />;
+        return <FaRupeeSign className="w-5 h-5 text-purple-500" />;
       case 'tds_deduction':
         return <FiAlertCircle className="w-5 h-5 text-amber-500" />;
       case 'commission':
-        return <FiDollarSign className="w-5 h-5 text-orange-500" />;
+        return <FaRupeeSign className="w-5 h-5 text-orange-500" />;
       case 'platform_fee':
         return <FiAlertCircle className="w-5 h-5 text-rose-500" />;
       default:
-        return <FiDollarSign className="w-5 h-5 text-gray-500" />;
+        return <FaRupeeSign className="w-5 h-5 text-gray-500" />;
     }
   };
 
@@ -143,7 +144,7 @@ const Wallet = () => {
                 <p className="text-3xl font-bold mb-4">₹{wallet.earnings?.toLocaleString() || 0}</p>
               </div>
               <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
-                <FiDollarSign className="w-6 h-6 text-white" />
+                <FaRupeeSign className="w-6 h-6 text-white" />
               </div>
             </div>
 
@@ -297,7 +298,7 @@ const Wallet = () => {
           <h3 className="font-bold text-gray-800 mb-4">Transaction History</h3>
           {filteredTransactions.length === 0 ? (
             <div className="bg-white rounded-xl p-8 text-center shadow-md">
-              <FiDollarSign className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+              <FaRupeeSign className="w-16 h-16 mx-auto mb-4 text-gray-300" />
               <p className="text-gray-600 font-semibold mb-2">No transactions yet</p>
               <p className="text-sm text-gray-500">Your ledger will appear here</p>
             </div>

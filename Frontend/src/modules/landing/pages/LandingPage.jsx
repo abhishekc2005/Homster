@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaUser, FaStore, FaHammer, FaCheckCircle, FaClock, FaArrowRight, FaChevronDown, FaChevronLeft, FaChevronRight, FaQuoteLeft, FaStar, FaHandshake, FaTruck, FaBroom, FaToolbox, FaBolt, FaPaintRoller, FaBug, FaAirFreshener, FaMapMarkerAlt, FaTv, FaTemperatureLow, FaTshirt, FaUtensils, FaMicrochip, FaGooglePlay, FaShieldAlt, FaMapMarker, FaFileInvoiceDollar, FaBars, FaTimes, FaMobileAlt, FaChartLine, FaTools } from 'react-icons/fa';
+import { FaUser, FaStore, FaHammer, FaCheckCircle, FaClock, FaArrowRight, FaChevronDown, FaChevronLeft, FaChevronRight, FaQuoteLeft, FaStar, FaHandshake, FaTruck, FaBroom, FaToolbox, FaBolt, FaPaintRoller, FaBug, FaAirFreshener, FaMapMarkerAlt, FaTv, FaTemperatureLow, FaTshirt, FaUtensils, FaMicrochip, FaGooglePlay, FaShieldAlt, FaMapMarker, FaRupeeSign, FaBars, FaTimes, FaMobileAlt, FaChartLine, FaTools } from 'react-icons/fa';
 import { configService } from '../../../services/configService';
 import { publicCatalogService } from '../../../services/catalogService';
 import { useBranding } from '../../../context/BrandingContext';
@@ -419,7 +419,7 @@ const LandingPage = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                 {[
                     { title: "Real-time Tracking", desc: "Monitor your Xpert live on the map as they head to your location.", icon: <FaMapMarker />, bg: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&q=80&w=800" },
-                    { title: "Doorstep Billing", desc: "Verified invoices generated at home. Transparency in every charge.", icon: <FaFileInvoiceDollar />, bg: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800" },
+                    { title: "Doorstep Billing", desc: "Verified invoices generated at home. Transparency in every charge.", icon: <FaRupeeSign />, bg: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800" },
                     { title: "Platform Warranty", desc: "6-month warranty on every certified Homestr spare part replaced.", icon: <FaShieldAlt />, bg: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" },
                     { title: "Direct Connect", desc: "Call or chat with your assigned technician directly in-app.", icon: <FaHandshake />, bg: "https://images.unsplash.com/photo-1521791136064-7986c2959213?auto=format&fit=crop&q=80&w=800" }
                 ].map((item, i) => (

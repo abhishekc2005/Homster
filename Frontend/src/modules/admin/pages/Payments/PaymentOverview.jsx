@@ -4,7 +4,6 @@ import {
   FiSearch,
   FiFilter,
   FiDownload,
-  FiDollarSign,
   FiTrendingUp,
   FiTrendingDown,
   FiAlertCircle,
@@ -12,6 +11,7 @@ import {
   FiClock,
   FiXCircle
 } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { adminTransactionService } from '../../../../services/adminTransactionService';
 import toast from 'react-hot-toast';
 import { exportToCSV } from '../../../../utils/csvExport';
@@ -178,7 +178,7 @@ const PaymentOverview = () => {
             <h3 className="text-2xl font-bold text-gray-800 mt-1">{formatCurrency(stats.totalRevenue)}</h3>
           </div>
           <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-            <FiDollarSign className="w-5 h-5" />
+            <FaRupeeSign className="w-5 h-5" />
           </div>
         </div>
 

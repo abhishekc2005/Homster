@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiDollarSign, FiSearch, FiLoader, FiArrowUpRight, FiCheckCircle } from 'react-icons/fi';
+import { FiSearch, FiLoader, FiArrowUpRight, FiCheckCircle } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import CardShell from '../UserCategories/components/CardShell';
 import adminWorkerService from '../../../../services/adminWorkerService';
@@ -37,7 +38,7 @@ const WorkerPayments = () => {
   return (
     <div className="space-y-6">
       <CardShell
-        icon={FiDollarSign}
+        icon={FaRupeeSign}
       >
         {/* Search */}
         <div className="mb-6 max-w-md">

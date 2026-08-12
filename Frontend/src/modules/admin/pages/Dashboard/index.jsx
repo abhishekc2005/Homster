@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { FiUser, FiBriefcase, FiUsers, FiShoppingBag, FiDollarSign, FiActivity } from 'react-icons/fi';
+import { FiUser, FiBriefcase, FiUsers, FiShoppingBag, FiActivity } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import RevenueLineChart from '../../components/dashboard/RevenueLineChart';
 import BookingsBarChart from '../../components/dashboard/BookingsBarChart';
 import BookingStatusPieChart from '../../components/dashboard/BookingStatusPieChart';
@@ -145,7 +146,7 @@ const AdminDashboard = () => {
       title: period === 'month' ? 'Monthly Revenue' : period === 'year' ? 'Yearly Revenue' : period === 'today' ? 'Today\'s Revenue' : period === 'week' ? 'Weekly Revenue' : 'Revenue',
       value: formatCurrency(stats.totalRevenue || 0),
       change: 0,
-      icon: FiDollarSign,
+      icon: FaRupeeSign,
       color: 'text-white',
       bgColor: 'bg-gradient-to-br from-green-500 to-emerald-600',
       cardBg: 'bg-gradient-to-br from-green-50 to-emerald-50',

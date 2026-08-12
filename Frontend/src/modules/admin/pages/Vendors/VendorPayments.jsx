@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiDollarSign, FiLoader, FiArrowUpRight, FiArrowDownLeft, FiCreditCard } from 'react-icons/fi';
+import { FiLoader, FiArrowUpRight, FiArrowDownLeft, FiCreditCard } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import CardShell from '../UserCategories/components/CardShell';
 import adminVendorService from '../../../../services/adminVendorService';
@@ -34,7 +35,7 @@ const VendorPayments = () => {
         <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-6 rounded-2xl text-white shadow-lg shadow-blue-200">
           <div className="flex justify-between items-start mb-4">
             <div className="p-2 bg-white/20 rounded-lg">
-              <FiDollarSign className="w-6 h-6" />
+              <FaRupeeSign className="w-6 h-6" />
             </div>
             <span className="text-xs font-bold bg-white/20 px-2 py-1 rounded">Total Platform Balance</span>
           </div>

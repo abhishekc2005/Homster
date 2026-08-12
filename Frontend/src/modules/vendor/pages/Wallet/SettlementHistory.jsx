@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiClock, FiCheck, FiX, FiDollarSign, FiChevronRight } from 'react-icons/fi';
+import { FiClock, FiCheck, FiX, FiChevronRight } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { vendorTheme as themeColors } from '../../../../theme';
 import Header from '../../components/layout/Header';
 import BottomNav from '../../components/layout/BottomNav';
@@ -58,7 +59,7 @@ const SettlementHistory = () => {
       case 'rejected':
         return <FiX className="w-5 h-5 text-red-500" />;
       default:
-        return <FiDollarSign className="w-5 h-5 text-gray-500" />;
+        return <FaRupeeSign className="w-5 h-5 text-gray-500" />;
     }
   };
 
@@ -133,7 +134,7 @@ const SettlementHistory = () => {
           </div>
         ) : settlements.length === 0 ? (
           <div className="bg-white rounded-2xl p-8 text-center shadow-md">
-            <FiDollarSign className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+            <FaRupeeSign className="w-16 h-16 mx-auto mb-4 text-gray-300" />
             <p className="text-gray-600 font-semibold mb-2">No settlements found</p>
             <p className="text-sm text-gray-500">Your settlement history will appear here</p>
           </div>

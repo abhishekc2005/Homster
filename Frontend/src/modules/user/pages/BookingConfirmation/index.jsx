@@ -8,7 +8,6 @@ import {
   FiClock,
   FiCalendar,
   FiPackage,
-  FiDollarSign,
   FiHome,
   FiArrowRight,
   FiLoader,
@@ -16,6 +15,7 @@ import {
   FiBell,
   FiXCircle
 } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { bookingService } from '../../../../services/bookingService';
 import NotificationBell from '../../components/common/NotificationBell';
 import ConfirmDialog from '../../../../components/common/ConfirmDialog';
@@ -450,7 +450,7 @@ const BookingConfirmation = () => {
                 {booking.paymentMethod === 'plan_benefit' ? (
                   <FiPackage className="w-5 h-5 text-amber-600" />
                 ) : (
-                  <FiDollarSign className="w-5 h-5 text-slate-600" />
+                  <FaRupeeSign className="w-5 h-5 text-slate-600" />
                 )}
               </div>
               <h3 className="text-lg font-bold text-slate-900">Payment Summary</h3>

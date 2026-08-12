@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiDollarSign, FiTrendingUp, FiCalendar, FiArrowRight } from 'react-icons/fi';
+import { FiTrendingUp, FiCalendar, FiArrowRight } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { vendorTheme as themeColors } from '../../../../theme';
 import Header from '../../components/layout/Header';
 import BottomNav from '../../components/layout/BottomNav';
@@ -129,7 +130,7 @@ const Earnings = () => {
           >
             <div className="flex items-center justify-between mb-2">
               <p className="text-sm text-gray-600">This Month</p>
-              <FiDollarSign className="w-4 h-4 text-gray-400" />
+              <FaRupeeSign className="w-4 h-4 text-gray-400" />
             </div>
             <p className="text-2xl font-bold" style={{ color: themeColors.button }}>
               ₹{earnings.month.toLocaleString()}
@@ -144,7 +145,7 @@ const Earnings = () => {
           >
             <div className="flex items-center justify-between mb-2">
               <p className="text-sm text-gray-600">Total</p>
-              <FiDollarSign className="w-4 h-4" style={{ color: themeColors.icon }} />
+              <FaRupeeSign className="w-4 h-4" style={{ color: themeColors.icon }} />
             </div>
             <p className="text-2xl font-bold" style={{ color: themeColors.button }}>
               ₹{earnings.total.toLocaleString()}
@@ -193,7 +194,7 @@ const Earnings = () => {
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
               }}
             >
-              <FiDollarSign className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+              <FaRupeeSign className="w-16 h-16 mx-auto mb-4 text-gray-300" />
               <p className="text-gray-600 font-semibold mb-2">No earnings yet</p>
               <p className="text-sm text-gray-500">Your earnings will appear here</p>
             </div>

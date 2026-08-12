@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FiMapPin, FiClock, FiDollarSign, FiUser, FiPhone, FiNavigation, FiArrowRight, FiEdit, FiCheckCircle, FiCreditCard, FiX, FiCheck, FiTool, FiXCircle, FiAward, FiPackage, FiAlertCircle } from 'react-icons/fi';
+import { FiMapPin, FiClock, FiUser, FiPhone, FiNavigation, FiArrowRight, FiEdit, FiCheckCircle, FiCreditCard, FiX, FiCheck, FiTool, FiXCircle, FiAward, FiPackage, FiAlertCircle } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { vendorTheme as themeColors } from '../../../../theme';
 import Header from '../../components/layout/Header';
@@ -1325,7 +1326,7 @@ export default function BookingDetails() {
                   className="w-full py-4 rounded-xl font-bold bg-blue-600 text-white flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg"
                   style={{ background: 'linear-gradient(135deg, #3B82F6, #2563EB)' }}
                 >
-                  <FiDollarSign className="w-5 h-5" />
+                  <FaRupeeSign className="w-5 h-5" />
                   {booking.paymentMethod === 'plan_benefit' ? 'Prepare/Edit Final Bill' : 'Prepare Bill & Collect Cash'}
                 </button>
 
@@ -1376,7 +1377,7 @@ export default function BookingDetails() {
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-500">
-                <FiDollarSign className="w-5 h-5" />
+                <FaRupeeSign className="w-5 h-5" />
               </div>
               <h3 className="font-bold text-gray-800">Worker Payout</h3>
             </div>

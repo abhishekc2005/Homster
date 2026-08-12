@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, lazy, Suspense } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FiMapPin, FiPhone, FiClock, FiUser, FiCheck, FiX, FiArrowRight, FiNavigation, FiTool, FiCheckCircle, FiDollarSign, FiCamera, FiPlus, FiTrash, FiXCircle, FiAward, FiFileText } from 'react-icons/fi';
+import { FiMapPin, FiPhone, FiClock, FiUser, FiCheck, FiX, FiArrowRight, FiNavigation, FiTool, FiCheckCircle, FiCamera, FiPlus, FiTrash, FiXCircle, FiAward, FiFileText } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { workerTheme as themeColors } from '../../../../theme';
 import Header from '../../components/layout/Header';
 import { SkeletonCard } from '../../../../components/common/SkeletonLoaders';
@@ -536,7 +537,7 @@ const JobDetails = () => {
         >
           <div className="flex items-center gap-2 mb-4 pb-2 border-b border-gray-100">
             <div className={`p-2 rounded-lg ${job.paymentMethod === 'plan_benefit' ? 'bg-amber-100' : 'bg-gray-100'}`}>
-              <FiDollarSign className="w-5 h-5" style={{ color: job.paymentMethod === 'plan_benefit' ? '#d97706' : themeColors.button }} />
+              <FaRupeeSign className="w-5 h-5" style={{ color: job.paymentMethod === 'plan_benefit' ? '#d97706' : themeColors.button }} />
             </div>
             <div>
               <h3 className="font-bold text-gray-800">

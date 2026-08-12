@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSettings, FiGrid, FiDollarSign, FiSave, FiUser, FiMail, FiTrash2, FiPlus, FiUsers, FiShield, FiFileText, FiMapPin, FiPhone, FiHeadphones, FiMessageCircle, FiEdit, FiLock, FiUnlock, FiX, FiImage } from 'react-icons/fi';
+import { FiSettings, FiGrid, FiSave, FiUser, FiMail, FiTrash2, FiPlus, FiUsers, FiShield, FiFileText, FiMapPin, FiPhone, FiHeadphones, FiMessageCircle, FiEdit, FiLock, FiUnlock, FiX, FiImage } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { getSettings, updateSettings, updateAdminProfile, getAdminProfile, getAllAdmins, createAdmin, deleteAdmin, updateAdminDetails, toggleAdminStatus } from '../../services/settingsService';
 import uploadToCloudinary from '../../../../utils/cloudinaryUpload';
 import { cityService } from '../../services/cityService';
@@ -484,7 +485,7 @@ const AdminSettings = () => {
         <div onClick={() => setActiveView('financial')}
           className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer group">
           <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-100 transition-colors">
-            <FiDollarSign className="w-6 h-6 text-green-600" />
+            <FaRupeeSign className="w-6 h-6 text-green-600" />
           </div>
           <h3 className="text-lg font-bold text-gray-800 mb-2">Financial Info</h3>
           <p className="text-sm text-gray-500">Configure charges, commissions, and billing details</p>
@@ -728,7 +729,7 @@ const AdminSettings = () => {
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 h-fit">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-2 bg-green-100 rounded-lg">
-                    <FiDollarSign className="w-5 h-5 text-green-600" />
+                    <FaRupeeSign className="w-5 h-5 text-green-600" />
                   </div>
                   <h2 className="text-lg font-bold text-gray-800">Financial Configuration</h2>
                 </div>

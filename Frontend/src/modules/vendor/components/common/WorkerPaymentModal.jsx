@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FiX, FiDollarSign, FiCamera, FiCheck, FiInfo, FiTrash, FiCreditCard } from 'react-icons/fi';
+import { FiX, FiCamera, FiCheck, FiInfo, FiTrash, FiCreditCard } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { vendorTheme as themeColors } from '../../../../theme';
 import { toast } from 'react-hot-toast';
@@ -100,7 +101,7 @@ const WorkerPaymentModal = ({ isOpen, onClose, workerName, amountDue = 0, onConf
               {/* Worker Info */}
               <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100 flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-white border border-gray-100 flex items-center justify-center text-green-600 shadow-sm">
-                  <FiDollarSign className="w-6 h-6" />
+                  <FaRupeeSign className="w-6 h-6" />
                 </div>
                 <div>
                   <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Paying To</p>

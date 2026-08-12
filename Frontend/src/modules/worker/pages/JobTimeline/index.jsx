@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FiCheck, FiClock, FiUser, FiMapPin, FiTool, FiDollarSign, FiCheckCircle, FiX, FiNavigation } from 'react-icons/fi';
+import { FiCheck, FiClock, FiUser, FiMapPin, FiTool, FiCheckCircle, FiX, FiNavigation } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { workerTheme as themeColors } from '../../../../theme';
 import Header from '../../components/layout/Header';
 import { CashCollectionModal, WorkCompletionModal } from '../../components/common';
@@ -259,7 +260,7 @@ const JobTimeline = () => {
     {
       id: 5,
       title: 'Customer Payment',
-      icon: FiDollarSign,
+      icon: FaRupeeSign,
       action: currentStage === 5 && !job?.cashCollected && job?.paymentMode === 'CASH' ? () => setIsPaymentModalOpen(true) : null,
       actionLabel: 'Collect Cash',
       description: job?.cashCollected ? 'Cash collected successfully.' : (job?.paymentMode === 'CASH' ? 'Pending cash collection.' : 'Online payment verified.'),
@@ -284,7 +285,7 @@ const JobTimeline = () => {
     {
       id: 8,
       title: 'Worker Payment',
-      icon: FiDollarSign,
+      icon: FaRupeeSign,
       action: (currentStage === 8 && !(job?.isWorkerPaid || job?.workerPaymentStatus === 'PAID' || job?.workerPaymentStatus === 'SUCCESS')) ? handleRequestPayment : null,
       actionLabel: 'Ask Vendor for Payment',
       description: (job?.isWorkerPaid || job?.workerPaymentStatus === 'PAID' || job?.workerPaymentStatus === 'SUCCESS') ? 'Payment received successfully.' : 'Waiting for vendor to release payment.',

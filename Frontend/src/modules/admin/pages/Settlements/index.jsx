@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { FiDollarSign, FiCheck, FiX, FiEye, FiClock, FiUsers, FiTrendingUp, FiAlertCircle, FiDownload } from 'react-icons/fi';
+import { FiCheck, FiX, FiEye, FiClock, FiUsers, FiTrendingUp, FiAlertCircle, FiDownload } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import Modal from '../../components/Modal';
 import Button from '../../components/Button';
@@ -311,7 +312,7 @@ const SettlementManagement = () => {
         {
           title: 'Total Pending Amount',
           value: `₹${pendingAmount.toLocaleString()}`,
-          icon: FiDollarSign,
+          icon: FaRupeeSign,
           color: 'text-orange-600',
           bg: 'bg-orange-50',
           border: 'border-orange-100'
@@ -353,7 +354,7 @@ const SettlementManagement = () => {
         {
           title: 'Total Due from Vendors',
           value: `₹${totalDue.toLocaleString()}`,
-          icon: FiDollarSign,
+          icon: FaRupeeSign,
           color: 'text-red-600',
           bg: 'bg-red-50',
           border: 'border-red-100'
@@ -431,7 +432,7 @@ const SettlementManagement = () => {
         {
           title: 'Total Due to Admin',
           value: `₹${dashboard.totalDueToAdmin?.toLocaleString() || 0}`,
-          icon: FiDollarSign,
+          icon: FaRupeeSign,
           color: 'text-red-600',
           bg: 'bg-red-50',
           border: 'border-red-100'
@@ -622,7 +623,7 @@ const SettlementManagement = () => {
                       className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
                       title="Update Limit"
                     >
-                      <FiDollarSign className="w-4 h-4" />
+                      <FaRupeeSign className="w-4 h-4" />
                     </button>
                     {vendor.isBlocked ? (
                       <button

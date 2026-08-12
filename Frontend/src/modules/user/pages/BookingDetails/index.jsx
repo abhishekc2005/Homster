@@ -12,7 +12,6 @@ import {
   FiXCircle,
   FiLoader,
   FiCalendar,
-  FiDollarSign,
   FiPackage,
   FiEdit2,
   FiPhone,
@@ -25,8 +24,10 @@ import {
   FiChevronRight,
   FiSearch,
   FiHome,
-  FiAlertCircle
+  FiAlertCircle,
+  FiTool
 } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { bookingService } from '../../../../services/bookingService';
 import { paymentService } from '../../../../services/paymentService';
 import { cartService } from '../../../../services/cartService';
@@ -927,7 +928,7 @@ const BookingDetails = () => {
                     {booking.paymentStatus === 'success' ? (
                       <FiCheckCircle className="w-6 h-6 text-white" />
                     ) : (
-                      <FiDollarSign className="w-6 h-6 text-white" />
+                      <FaRupeeSign className="w-6 h-6 text-white" />
                     )}
                   </div>
                   <div>
@@ -947,7 +948,7 @@ const BookingDetails = () => {
                       onClick={handleOnlinePayment}
                       className="w-full py-4 mb-4 bg-white text-orange-600 rounded-2xl font-black text-sm shadow-xl hover:bg-orange-50 active:scale-95 transition-all flex items-center justify-center gap-2 group"
                     >
-                      <FiDollarSign className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                      <FaRupeeSign className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                       Pay Online Now
                       <FiChevronRight className="w-4 h-4" />
                     </button>
@@ -1162,7 +1163,7 @@ const BookingDetails = () => {
                   {booking.paymentMethod === 'plan_benefit' ? (
                     <FiAward className="w-5 h-5 text-amber-600" />
                   ) : (
-                    <FiDollarSign className="w-5 h-5 text-green-600" />
+                    <FaRupeeSign className="w-5 h-5 text-green-600" />
                   )}
                 </div>
                 <div className="flex-1">
@@ -1283,7 +1284,7 @@ const BookingDetails = () => {
                       <div className="mt-2 pt-2 border-t border-gray-100">
                         <div className="flex justify-between text-xs font-bold text-gray-600">
                           <span className="flex items-center gap-2 uppercase tracking-wide">
-                            {booking.paymentMethod === 'cash collected' ? <FiDollarSign className="text-emerald-500" /> : <MdQrCode className="text-blue-500" />}
+                            {booking.paymentMethod === 'cash collected' ? <FaRupeeSign className="text-emerald-500" /> : <MdQrCode className="text-blue-500" />}
                             Payment Method
                           </span>
                           <span className={`${booking.paymentMethod === 'cash collected' ? 'text-emerald-600' : 'text-blue-600'} uppercase`}>
@@ -1410,7 +1411,7 @@ const BookingDetails = () => {
             <div className="bg-white rounded-3xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 p-6 space-y-4">
               <div className="text-center mb-4">
                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <FiDollarSign className="w-8 h-8 text-orange-600" />
+                  <FaRupeeSign className="w-8 h-8 text-orange-600" />
                 </div>
                 <h3 className="text-lg font-bold text-black">Payment Required</h3>
                 <p className="text-sm text-gray-500">The professional has completed the work. Please choose a payment method to verify and close your booking.</p>
@@ -1422,7 +1423,7 @@ const BookingDetails = () => {
                   className="w-full py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-transform"
                   style={{ background: themeColors.button }}
                 >
-                  <FiDollarSign className="w-5 h-5" />
+                  <FaRupeeSign className="w-5 h-5" />
                   Pay Online (Razorpay/UPI)
                 </button>
 

@@ -3,7 +3,6 @@ import { Routes, Route, Navigate, useLocation, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   FiTrendingUp,
-  FiDollarSign,
   FiUsers,
   FiShoppingBag,
   FiDownload,
@@ -13,6 +12,7 @@ import {
   FiActivity,
   FiBriefcase
 } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Bar, Legend
@@ -75,7 +75,7 @@ const ReportsOverview = () => {
     {
       title: 'Total Revenue',
       value: `₹${stats?.totalRevenue?.toLocaleString() || 0}`,
-      icon: FiDollarSign,
+      icon: FaRupeeSign,
       color: 'text-green-600',
       bg: 'bg-green-50',
       link: '/admin/reports/revenue'
@@ -212,7 +212,7 @@ const ReportsOverview = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <CardShell className="bg-white border-slate-200 p-4">
           <h3 className="text-base font-bold text-slate-900 flex items-center gap-2 mb-6">
-            <FiDollarSign className="text-primary-600" />
+            <FaRupeeSign className="text-primary-600" />
             Revenue Trends
           </h3>
           <div className="h-[300px] w-full">
@@ -295,7 +295,7 @@ const Reports = () => {
 
   const navTabs = [
     { name: 'Overview', path: '/admin/reports', icon: FiActivity, exact: true },
-    { name: 'Revenue', path: '/admin/reports/revenue', icon: FiDollarSign },
+    { name: 'Revenue', path: '/admin/reports/revenue', icon: FaRupeeSign },
     { name: 'Bookings', path: '/admin/reports/bookings', icon: FiShoppingBag },
     { name: 'Vendors', path: '/admin/reports/vendors', icon: FiUsers },
     { name: 'Workers', path: '/admin/reports/workers', icon: FiBriefcase },

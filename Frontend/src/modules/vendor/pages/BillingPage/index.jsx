@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { FiCheck, FiTool, FiPackage, FiFileText, FiPlus, FiTrash2, FiArrowLeft, FiDollarSign, FiClock, FiCreditCard, FiArrowRight, FiKey, FiCheckCircle } from 'react-icons/fi';
+import { FiCheck, FiTool, FiPackage, FiFileText, FiPlus, FiTrash2, FiArrowLeft, FiClock, FiCreditCard, FiArrowRight, FiKey, FiCheckCircle } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { MdQrCode } from 'react-icons/md';
 import { toast } from 'react-hot-toast';
 import { vendorTheme as themeColors } from '../../../../theme';
@@ -1096,7 +1097,7 @@ const BillingPage = () => {
                   <div>
                     <h4 className="font-bold text-gray-900 flex items-center gap-2 mb-2 pb-2 border-b border-gray-100">
                       <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${paymentMode === 'cash' ? 'bg-emerald-50 text-emerald-600' : 'bg-blue-50 text-blue-600'}`}>
-                        {paymentMode === 'cash' ? <FiDollarSign /> : <MdQrCode />}
+                        {paymentMode === 'cash' ? <FaRupeeSign /> : <MdQrCode />}
                       </span>
                       Payment Method
                     </h4>
@@ -1218,7 +1219,7 @@ const BillingPage = () => {
                   disabled={otpLoading || qrLoading}
                   className="py-3 bg-emerald-600 text-white font-bold rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 active:scale-95 transition-all disabled:opacity-50 text-[10px]"
                 >
-                  <FiDollarSign className="w-4 h-4" />
+                  <FaRupeeSign className="w-4 h-4" />
                   <span>Pay in Cash</span>
                 </button>
               )}

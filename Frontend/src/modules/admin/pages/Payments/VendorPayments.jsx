@@ -9,9 +9,9 @@ import {
   FiClock,
   FiXCircle,
   FiAlertCircle,
-  FiDollarSign,
   FiRefreshCcw
 } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { adminTransactionService } from '../../../../services/adminTransactionService';
 import toast from 'react-hot-toast';
 import { exportToCSV } from '../../../../utils/csvExport';
@@ -180,7 +180,7 @@ const VendorPayments = () => {
         >
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-green-50 rounded-xl">
-              <FiDollarSign className="w-6 h-6 text-green-600" />
+              <FaRupeeSign className="w-6 h-6 text-green-600" />
             </div>
           </div>
           <p className="text-gray-500 text-sm font-medium">Total Revenue</p>
@@ -222,7 +222,7 @@ const VendorPayments = () => {
         >
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-primary-50 rounded-xl">
-              <FiDollarSign className="w-6 h-6 text-primary-600" />
+              <FaRupeeSign className="w-6 h-6 text-primary-600" />
             </div>
           </div>
           <p className="text-gray-500 text-sm font-medium">Net Due</p>

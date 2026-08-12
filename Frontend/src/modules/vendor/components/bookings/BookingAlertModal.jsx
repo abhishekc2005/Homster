@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FiX, FiMapPin, FiClock, FiDollarSign, FiArrowRight, FiBell, FiAlertCircle, FiMinimize2, FiUsers } from 'react-icons/fi';
+import { FiX, FiMapPin, FiClock, FiArrowRight, FiBell, FiAlertCircle, FiMinimize2, FiUsers } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { vendorTheme as themeColors } from '../../../../theme';
 import { playAlertRing, stopAlertRing } from '../../../../utils/notificationSound';

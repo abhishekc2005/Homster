@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FiCheck, FiClock, FiUser, FiMapPin, FiTool, FiDollarSign, FiFileText, FiCheckCircle, FiX } from 'react-icons/fi';
+import { FiCheck, FiClock, FiUser, FiMapPin, FiTool, FiFileText, FiCheckCircle, FiX } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { vendorTheme as themeColors } from '../../../../theme';
 import Header from '../../components/layout/Header';
 import BottomNav from '../../components/layout/BottomNav';
@@ -310,7 +311,7 @@ const BookingTimeline = () => {
     {
       id: 8,
       title: 'Pay Worker',
-      icon: FiDollarSign,
+      icon: FaRupeeSign,
       action: (currentStage === 8 && !(booking?.isWorkerPaid || booking?.workerPaymentStatus === 'PAID' || booking?.workerPaymentStatus === 'SUCCESS')) ? handleWorkerPayment : null,
       description: (booking?.isWorkerPaid || booking?.workerPaymentStatus === 'PAID' || booking?.workerPaymentStatus === 'SUCCESS') ? 'Worker Paid' : 'Settle payment with worker',
     },

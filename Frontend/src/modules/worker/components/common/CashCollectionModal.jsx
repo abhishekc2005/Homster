@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FiX, FiPlus, FiTrash2, FiCreditCard, FiClock, FiCheck, FiDollarSign, FiPlusCircle } from 'react-icons/fi';
+import { FiX, FiPlus, FiTrash2, FiCreditCard, FiClock, FiCheck, FiPlusCircle } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 
 /**

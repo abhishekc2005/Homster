@@ -5,7 +5,6 @@ import {
   FiFilter,
   FiDownload,
   FiUser,
-  FiDollarSign,
   FiBriefcase,
   FiCheckCircle,
   FiAlertCircle,
@@ -13,6 +12,7 @@ import {
   FiLoader,
   FiActivity
 } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import adminWorkerService from '../../../../services/adminWorkerService';
 import toast from 'react-hot-toast';
 import { exportToCSV } from '../../../../utils/csvExport';
@@ -133,7 +133,7 @@ const WorkerPayments = () => {
         >
           <div className="flex items-center justify-between mb-4">
             <div className="p-3 bg-green-50 rounded-xl">
-              <FiDollarSign className="w-6 h-6 text-green-600" />
+              <FaRupeeSign className="w-6 h-6 text-green-600" />
             </div>
           </div>
           <p className="text-gray-500 text-sm font-medium">Total Lifetime Earnings</p>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiBell, FiRefreshCw, FiCheck, FiCheckCircle, FiTrash2, FiFilter, FiUser, FiDollarSign, FiUserCheck } from 'react-icons/fi';
+import { FiBell, FiRefreshCw, FiCheck, FiCheckCircle, FiTrash2, FiFilter, FiUser, FiUserCheck } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import { formatDistanceToNow } from 'date-fns';
 import api from '../../../../services/api';
@@ -75,11 +76,11 @@ const Notifications = () => {
   const getIcon = (type) => {
     switch (type) {
       case 'vendor_withdrawal_request':
-        return <FiDollarSign className="text-green-500" />;
+        return <FaRupeeSign className="text-green-500" />;
       case 'vendor_approval_request':
         return <FiUserCheck className="text-blue-500" />;
       case 'vendor_cash_limit_exceeded':
-        return <FiDollarSign className="text-red-500" />;
+        return <FaRupeeSign className="text-red-500" />;
       default:
         return <FiBell className="text-gray-500" />;
     }

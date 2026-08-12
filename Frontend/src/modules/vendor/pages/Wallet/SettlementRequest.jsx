@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiArrowLeft, FiSend, FiUpload, FiCheck, FiCreditCard, FiSmartphone, FiDollarSign, FiX } from 'react-icons/fi';
+import { FiArrowLeft, FiSend, FiUpload, FiCheck, FiCreditCard, FiSmartphone, FiX } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { vendorTheme as themeColors } from '../../../../theme';
 import Header from '../../components/layout/Header';
 import BottomNav from '../../components/layout/BottomNav';

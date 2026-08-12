@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiDollarSign, FiTrendingUp, FiPieChart, FiDownload } from 'react-icons/fi';
+import { FiTrendingUp, FiPieChart, FiDownload } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Bar, Legend, Cell, PieChart, Pie

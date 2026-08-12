@@ -4,7 +4,6 @@ import {
   FiFileText,
   FiDownload,
   FiCalendar,
-  FiDollarSign,
   FiTrendingUp,
   FiAlertTriangle,
   FiPercent,
@@ -15,6 +14,7 @@ import {
   FiX,
   FiCheck
 } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import api from '../../../../services/api';
 
 // Report Card Component
@@ -428,7 +428,7 @@ const PaymentReports = () => {
           title="Platform Earnings"
           value={`₹${(overview?.revenue?.totalPlatformRevenue || 0).toLocaleString('en-IN')}`}
           subtitle="Commission Earned"
-          icon={FiDollarSign}
+          icon={FaRupeeSign}
           color="green"
         />
         <StatsCard
@@ -449,7 +449,7 @@ const PaymentReports = () => {
           title="Vendor Earnings"
           value={`₹${(overview?.revenue?.totalVendorEarnings || 0).toLocaleString('en-IN')}`}
           subtitle="Total Vendors Gross"
-          icon={FiDollarSign}
+          icon={FaRupeeSign}
           color="teal"
         />
 

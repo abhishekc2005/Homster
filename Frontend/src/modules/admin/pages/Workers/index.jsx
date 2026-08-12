@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate, useLocation, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FiUsers, FiClock, FiActivity, FiDollarSign } from 'react-icons/fi';
+import { FiUsers, FiClock, FiActivity } from 'react-icons/fi';
 
 // Import sub-components
 // Import sub-components

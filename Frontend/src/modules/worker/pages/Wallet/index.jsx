@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { FiDollarSign, FiArrowUp, FiArrowDown, FiClock, FiBell, FiX, FiImage, FiFileText, FiCreditCard, FiCalendar, FiInfo } from 'react-icons/fi';
+import { FiArrowUp, FiArrowDown, FiClock, FiBell, FiX, FiImage, FiFileText, FiCreditCard, FiCalendar, FiInfo } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
 import { workerTheme as themeColors } from '../../../../theme';
 import Header from '../../components/layout/Header';
@@ -90,7 +91,7 @@ const Wallet = () => {
       case 'cash_collected':
         return <FiArrowUp className="w-5 h-5 text-red-500" />;
       default:
-        return <FiDollarSign className="w-5 h-5 text-gray-500" />;
+        return <FaRupeeSign className="w-5 h-5 text-gray-500" />;
     }
   };
 
@@ -168,7 +169,7 @@ const Wallet = () => {
                 <p className="text-3xl font-bold mb-4">₹{wallet.balance?.toLocaleString() || 0}</p>
               </div>
               <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
-                <FiDollarSign className="w-6 h-6 text-white" />
+                <FaRupeeSign className="w-6 h-6 text-white" />
               </div>
             </div>
             <div className="w-full bg-white/10 text-white py-2 rounded-xl font-medium text-xs text-center border border-white/20">
@@ -246,7 +247,7 @@ const Wallet = () => {
           <h3 className="font-bold text-gray-800 mb-4">Transaction History</h3>
           {filteredTransactions.length === 0 ? (
             <div className="bg-white rounded-xl p-8 text-center shadow-md">
-              <FiDollarSign className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+              <FaRupeeSign className="w-16 h-16 mx-auto mb-4 text-gray-300" />
               <p className="text-gray-600 font-semibold mb-2">No transactions yet</p>
               <p className="text-sm text-gray-500">Your payments will appear here</p>
             </div>
@@ -325,7 +326,7 @@ const Wallet = () => {
               <div className="sticky top-0 bg-gradient-to-br from-teal-600 to-teal-700 text-white px-6 py-5 rounded-t-3xl flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <FiDollarSign className="w-6 h-6" />
+                    <FaRupeeSign className="w-6 h-6" />
                   </div>
                   <div>
                     <h3 className="font-bold text-lg">Payment Details</h3>

@@ -5,7 +5,6 @@ import {
   FiUsers,
   FiBriefcase,
   FiActivity,
-  FiDollarSign,
   FiChevronRight
 } from 'react-icons/fi';
 

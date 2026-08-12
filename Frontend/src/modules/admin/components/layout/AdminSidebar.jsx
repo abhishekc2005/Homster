@@ -8,7 +8,6 @@ import {
   FiUser,
   FiShoppingBag,
   FiGrid,
-  FiDollarSign,
   FiFileText,
   FiBell,
   FiSettings,
@@ -18,6 +17,7 @@ import {
   FiTrash2,
   FiStar,
 } from "react-icons/fi";
+import { FaRupeeSign } from "react-icons/fa";
 import adminMenu from "../../config/adminMenu.json";
 import dashboardService from "../../services/dashboardService";
 
@@ -31,12 +31,12 @@ const iconMap = {
   "User Catalog": FiGrid,
   "Vendor Services": FiGrid,
   "Vendor Parts": FiPackage,
-  Payments: FiDollarSign,
+  Payments: FaRupeeSign,
   Reports: FiFileText,
   Notifications: FiBell,
   "Scrap Items": FiTrash2,
   Reviews: FiStar,
-  Settlements: FiDollarSign,
+  Settlements: FaRupeeSign,
   Settings: FiSettings,
   Plans: FiPackage,
 };

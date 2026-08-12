@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FiX, FiTrash, FiCamera, FiDollarSign, FiCheckCircle } from 'react-icons/fi';
+import { FiX, FiTrash, FiCamera, FiCheckCircle } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import flutterBridge from '../../../../utils/flutterBridge';
@@ -194,7 +195,7 @@ const WorkCompletionModal = ({ isOpen, onClose, job, onComplete, loading }) => {
                   <p className="text-lg font-black text-gray-800">₹{calculateTotal().toFixed(2)}</p>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-green-600 shadow-sm">
-                  <FiDollarSign className="w-5 h-5" />
+                  <FaRupeeSign className="w-5 h-5" />
                 </div>
               </div>
 

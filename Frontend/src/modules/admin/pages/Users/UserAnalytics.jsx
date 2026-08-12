@@ -5,10 +5,10 @@ import {
   FiTrendingUp,
   FiUsers,
   FiShoppingBag,
-  FiDollarSign,
   FiActivity,
   FiLoader
 } from 'react-icons/fi';
+import { FaRupeeSign } from 'react-icons/fa';
 import {
   AreaChart,
   Area,
