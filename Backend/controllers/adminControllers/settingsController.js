@@ -50,7 +50,9 @@ exports.updateSettings = async (req, res, next) => {
       // Booking Timing
       maxSearchTime, waveDuration, searchRadius,
       // Payment Control
-      isOnlinePaymentEnabled
+      isOnlinePaymentEnabled,
+      // Branding
+      companyLogo, companyFavicon
     } = req.body;
 
     let settings = await Settings.findOne({ type: 'global' });
@@ -118,6 +120,10 @@ exports.updateSettings = async (req, res, next) => {
       if (searchRadius !== undefined) settings.searchRadius = searchRadius;
       if (isOnlinePaymentEnabled !== undefined) settings.isOnlinePaymentEnabled = isOnlinePaymentEnabled;
 
+      // Branding update
+      if (companyLogo !== undefined) settings.companyLogo = companyLogo;
+      if (companyFavicon !== undefined) settings.companyFavicon = companyFavicon;
+
       await settings.save();
     }
 
@@ -155,7 +161,7 @@ exports.updateSettings = async (req, res, next) => {
 // Get Public Settings (Visited Charges, GST)
 exports.getPublicSettings = async (req, res, next) => {
   try {
-    let settings = await Settings.findOne({ type: 'global' }).select('visitedCharges serviceGstPercentage partsGstPercentage supportEmail supportPhone supportWhatsapp cancellationPenalty companyName companyAddress companyCity companyState companyPincode companyPhone companyEmail isOnlinePaymentEnabled');
+    let settings = await Settings.findOne({ type: 'global' }).select('visitedCharges serviceGstPercentage partsGstPercentage supportEmail supportPhone supportWhatsapp cancellationPenalty companyName companyAddress companyCity companyState companyPincode companyPhone companyEmail isOnlinePaymentEnabled companyLogo companyFavicon');
 
     // Default if not found (fallback values)
     if (!settings) {

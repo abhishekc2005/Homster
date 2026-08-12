@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useBranding } from '../../context/BrandingContext';
 
 /**
  * LogoLoader Component
@@ -10,6 +11,7 @@ import { motion } from 'framer-motion';
  * @param {string} size - Size classes for the logo
  */
 const LogoLoader = ({ fullScreen = false, overlay = false, inline = false, size = "w-20 h-20" }) => {
+  const { logoUrl } = useBranding();
   // For route transitions (default), use a non-blocking loader
   // For initial app load, use fullScreen with overlay
   // For inline loading (e.g. buttons), use inline
@@ -37,7 +39,7 @@ const LogoLoader = ({ fullScreen = false, overlay = false, inline = false, size 
         className={`relative ${size} flex items-center justify-center`}
       >
         <img
-          src="/cleaning-expert-logo.png"
+          src={logoUrl}
           alt="Loading..."
           className="w-full h-full object-cover rounded-full shadow-lg"
         />

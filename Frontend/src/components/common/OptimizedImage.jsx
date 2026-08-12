@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { optimizeCloudinaryUrl } from '../../utils/cloudinaryOptimize';
+import { useBranding } from '../../context/BrandingContext';
 
 /**
  * OptimizedImage Component
@@ -67,6 +68,8 @@ const OptimizedImage = ({
   }, [priority]);
 
   // Error fallback
+  const { logoUrl } = useBranding();
+
   if (hasError) {
     return (
       <div
@@ -74,7 +77,7 @@ const OptimizedImage = ({
         style={{ width, height, ...style }}
       >
         <img
-          src="/Homestr-logo.png"
+          src={logoUrl}
           alt="Image not available"
           className="w-12 h-12 object-contain opacity-40 grayscale"
         />

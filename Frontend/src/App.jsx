@@ -6,6 +6,7 @@ import AppRoutes from './routes';
 import { SocketProvider } from './context/SocketContext';
 import { CartProvider } from './context/CartContext';
 import { CityProvider } from './context/CityContext';
+import { BrandingProvider } from './context/BrandingContext';
 import { initializePushNotifications, setupForegroundNotificationHandler } from './services/pushNotificationService';
 import { LocationPermissionChecker } from './components/common';
 
@@ -41,6 +42,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <BrandingProvider>
       <SocketProvider>
         <CityProvider>
           <CartProvider>
@@ -76,6 +78,7 @@ function App() {
           </CartProvider>
         </CityProvider>
       </SocketProvider>
+      </BrandingProvider>
     </BrowserRouter>
   );
 }

@@ -172,7 +172,18 @@ const settingsSchema = new mongoose.Schema({
   isOnlinePaymentEnabled: {
     type: Boolean,
     default: true
+  },
+
+  // Branding Configuration
+  companyLogo: {
+    type: String,
+    default: '' // Cloudinary URL for the main logo
+  },
+  companyFavicon: {
+    type: String,
+    default: '' // Cloudinary URL for favicon (falls back to companyLogo)
   }
+
 }, { timestamps: true });
 
 module.exports = mongoose.model('Settings', settingsSchema);

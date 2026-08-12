@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSettings, FiGrid, FiDollarSign, FiSave, FiUser, FiMail, FiTrash2, FiPlus, FiUsers, FiShield, FiFileText, FiMapPin, FiPhone, FiHeadphones, FiMessageCircle, FiEdit, FiLock, FiUnlock, FiX } from 'react-icons/fi';
+import { FiSettings, FiGrid, FiDollarSign, FiSave, FiUser, FiMail, FiTrash2, FiPlus, FiUsers, FiShield, FiFileText, FiMapPin, FiPhone, FiHeadphones, FiMessageCircle, FiEdit, FiLock, FiUnlock, FiX, FiImage } from 'react-icons/fi';
 import { getSettings, updateSettings, updateAdminProfile, getAdminProfile, getAllAdmins, createAdmin, deleteAdmin, updateAdminDetails, toggleAdminStatus } from '../../services/settingsService';
+import uploadToCloudinary from '../../../../utils/cloudinaryUpload';
 import { cityService } from '../../services/cityService';
 import CityManagement from '../Cities';
 import { toast } from 'react-hot-toast';
@@ -50,6 +51,13 @@ const AdminSettings = () => {
     supportWhatsapp: ''
   });
   const [supportLoading, setSupportLoading] = useState(false);
+
+  // Branding Settings State
+  const [brandingSettings, setBrandingSettings] = useState({
+    companyLogo: '',
+    companyFavicon: ''
+  });
+  const [brandingLoading, setBrandingLoading] = useState(false);
 
   const [profile, setProfile] = useState({
     name: '',
@@ -142,6 +150,11 @@ const AdminSettings = () => {
             supportEmail: res.settings.supportEmail || '',
             supportPhone: res.settings.supportPhone || '',
             supportWhatsapp: res.settings.supportWhatsapp || ''
+          });
+          // Load branding settings
+          setBrandingSettings({
+            companyLogo: res.settings.companyLogo || '',
+            companyFavicon: res.settings.companyFavicon || ''
           });
         }
       } catch (error) {
@@ -301,6 +314,40 @@ const AdminSettings = () => {
       toast.error('Failed to update support settings');
     } finally {
       setSupportLoading(false);
+    }
+  };
+
+  // Handle logo upload and save
+  const handleLogoUpload = async (e, field) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      return toast.error('Please upload a valid image file');
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      return toast.error('Image size should be less than 2MB');
+    }
+
+    setBrandingLoading(true);
+    const toastId = toast.loading(`Uploading ${field === 'companyLogo' ? 'Logo' : 'Favicon'}...`);
+    
+    try {
+      // 1. Upload to Cloudinary directly from frontend
+      const secureUrl = await uploadToCloudinary(file, 'appzeto_branding');
+      
+      // 2. Update local state
+      setBrandingSettings(prev => ({ ...prev, [field]: secureUrl }));
+      
+      // 3. Save to backend immediately
+      await updateSettings({ [field]: secureUrl });
+      
+      toast.success(`${field === 'companyLogo' ? 'Logo' : 'Favicon'} updated successfully!`, { id: toastId });
+    } catch (error) {
+      console.error('Branding upload error:', error);
+      toast.error('Failed to upload image', { id: toastId });
+    } finally {
+      setBrandingLoading(false);
     }
   };
 
@@ -479,7 +526,113 @@ const AdminSettings = () => {
           <p className="text-sm text-gray-500">Add, remove, and view all system administrators</p>
         </div>
       )}
+
+      {/* Branding Settings Card - Super Admin Only */}
+      {isSuperAdmin && (
+        <div onClick={() => setActiveView('branding')}
+          className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer group">
+          <div className="w-12 h-12 bg-pink-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-pink-100 transition-colors">
+            <FiImage className="w-6 h-6 text-pink-600" />
+          </div>
+          <h3 className="text-lg font-bold text-gray-800 mb-2">Branding</h3>
+          <p className="text-sm text-gray-500">Update company logo and favicon</p>
+        </div>
+      )}
     </div>
+  );
+
+  // Render Branding Settings
+  const renderBrandingSettings = () => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      className="max-w-4xl mx-auto"
+    >
+      <div className="flex items-center gap-4 mb-8">
+        <button onClick={() => setActiveView('main')} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <FiGrid className="w-6 h-6 text-gray-600" />
+        </button>
+        <div>
+          <h2 className="text-2xl font-bold text-gray-800">Branding Settings</h2>
+          <p className="text-gray-500">Update your app's visual identity</p>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 space-y-8">
+        {/* Main Logo */}
+        <div>
+          <h3 className="text-lg font-bold text-gray-800 mb-1">Company Logo</h3>
+          <p className="text-sm text-gray-500 mb-6">This logo appears across the User, Vendor, and Admin apps. Recommended size: 512x512px (PNG/JPG).</p>
+          
+          <div className="flex items-center gap-8">
+            <div className="w-32 h-32 rounded-full border border-gray-200 shadow-inner flex items-center justify-center bg-gray-50 overflow-hidden relative group">
+              <img 
+                src={brandingSettings.companyLogo || '/cleaning-expert-logo.png'} 
+                alt="Company Logo" 
+                className="w-full h-full object-cover"
+              />
+              {brandingLoading && (
+                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                  <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
+            </div>
+            
+            <div>
+              <label className="bg-brand text-white px-6 py-2.5 rounded-lg hover:bg-brand/90 transition-colors cursor-pointer inline-flex items-center gap-2">
+                <FiImage />
+                Upload New Logo
+                <input 
+                  type="file" 
+                  accept="image/png, image/jpeg" 
+                  className="hidden" 
+                  onChange={(e) => handleLogoUpload(e, 'companyLogo')}
+                  disabled={brandingLoading}
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <hr className="border-gray-100" />
+
+        {/* Favicon */}
+        <div>
+          <h3 className="text-lg font-bold text-gray-800 mb-1">Browser Favicon</h3>
+          <p className="text-sm text-gray-500 mb-6">The small icon shown in browser tabs. If left empty, it falls back to the Company Logo.</p>
+          
+          <div className="flex items-center gap-8">
+            <div className="w-16 h-16 rounded border border-gray-200 shadow-inner flex items-center justify-center bg-gray-50 overflow-hidden relative group">
+              <img 
+                src={brandingSettings.companyFavicon || brandingSettings.companyLogo || '/cleaning-expert-logo.png'} 
+                alt="Favicon" 
+                className="w-8 h-8 object-contain"
+              />
+              {brandingLoading && (
+                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
+            </div>
+            
+            <div>
+              <label className="bg-gray-100 text-gray-700 px-6 py-2.5 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer inline-flex items-center gap-2 font-medium border border-gray-200">
+                <FiImage />
+                Upload Favicon
+                <input 
+                  type="file" 
+                  accept="image/png, image/jpeg, image/x-icon" 
+                  className="hidden" 
+                  onChange={(e) => handleLogoUpload(e, 'companyFavicon')}
+                  disabled={brandingLoading}
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
   );
 
   return (
@@ -496,6 +649,9 @@ const AdminSettings = () => {
       {activeView === 'main' && renderMainMenu()}
 
       <AnimatePresence mode="wait">
+        {/* Branding View */}
+        {activeView === 'branding' && renderBrandingSettings()}
+
 
         {/* Profile View */}
         {activeView === 'profile' && (

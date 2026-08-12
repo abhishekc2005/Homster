@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useBranding } from '../../context/BrandingContext';
 
 /**
  * LazyImage Component - Optimized image loading with:
@@ -28,6 +29,7 @@ const LazyImage = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isInView, setIsInView] = useState(false);
+  const { logoUrl } = useBranding();
   const imgRef = useRef(null);
 
   // Intersection Observer for lazy loading
@@ -82,7 +84,7 @@ const LazyImage = ({
         style={{ backgroundColor: hasError ? '#f9fafb' : placeholder }}
       >
         <img
-          src="/Homestr-logo.png"
+          src={logoUrl}
           alt="Broken image"
           className="w-12 h-12 object-contain opacity-40 grayscale"
         />
