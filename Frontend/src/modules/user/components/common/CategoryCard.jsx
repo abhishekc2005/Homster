@@ -34,21 +34,19 @@ const CategoryCard = memo(({ icon, title, onClick, hasSaleBadge = false, index =
       }}
     >
       <div
-        className="w-[64px] h-[64px] rounded-2xl flex items-center justify-center mb-2 relative border border-gray-100 flex-shrink-0 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-primary-100 group-hover:-translate-y-1 bg-white"
+        className="w-[66px] h-[66px] rounded-2xl flex items-center justify-center mb-2 relative border flex-shrink-0 transition-all duration-300 group-hover:-translate-y-1 bg-gradient-to-br from-[#347989]/5 via-white to-[#D68F35]/5"
         style={{
-          boxShadow: '0 8px 20px -6px rgba(0,0,0,0.05)',
+          borderColor: 'rgba(52, 121, 137, 0.15)',
+          boxShadow: '0 4px 14px -2px rgba(52, 121, 137, 0.08)',
         }}
       >
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#347989]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         {icon || (
           <svg
             className="w-7 h-7 text-gray-400 transition-colors duration-300"
-            style={{ color: 'inherit' }}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
-            onMouseEnter={(e) => e.currentTarget.style.color = themeColors.button}
-            onMouseLeave={(e) => e.currentTarget.style.color = 'inherit'}
           >
             <path
               strokeLinecap="round"
@@ -60,7 +58,7 @@ const CategoryCard = memo(({ icon, title, onClick, hasSaleBadge = false, index =
         )}
         {hasSaleBadge && (
           <div
-            className="absolute -top-1.5 -right-1.5 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-lg z-10 border border-white"
+            className="absolute -top-1.5 -right-1.5 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-md z-10 border border-white"
             style={{
               background: themeColors.gradient,
               boxShadow: `0 4px 12px ${themeColors.brand.teal}4D`

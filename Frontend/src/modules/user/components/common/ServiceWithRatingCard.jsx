@@ -30,12 +30,11 @@ const ServiceWithRatingCard = memo(({ image, title, rating, reviews, price, orig
             decoding="async"
           />
         ) : (
-          <div className="w-full h-36 flex items-center justify-center bg-gray-50 border-b border-gray-100">
-            <img
-              src="/Homestr-logo.png"
-              alt="Placeholder"
-              className="w-12 h-12 object-contain opacity-40 grayscale"
-            />
+          <div className="w-full h-36 flex flex-col items-center justify-center bg-gradient-to-br from-[#347989]/10 via-[#F4FBFB] to-[#D68F35]/10 border-b border-gray-100 relative">
+            <div className="w-12 h-12 rounded-2xl bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-sm border border-white/60">
+              <span className="text-xl">🛠️</span>
+            </div>
+            <span className="text-[10px] font-bold text-[#347989] mt-2 uppercase tracking-wider">Homster Service</span>
           </div>
         )}
       </div>

@@ -93,89 +93,74 @@ const BottomNav = React.memo(() => {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-40 w-full lg:hidden"
+      className="fixed bottom-3 left-3 right-3 z-50 max-w-lg mx-auto lg:hidden"
       style={{
         WebkitBackfaceVisibility: 'hidden',
       }}
     >
       <div
-        className="w-full pb-4 pt-3 px-2"
+        className="w-full px-3 py-2.5 rounded-full relative"
         style={{
-          background: 'rgba(255, 255, 255, 0.98)',
+          background: 'rgba(255, 255, 255, 0.92)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          boxShadow: '0 -4px 30px rgba(0, 0, 0, 0.08)',
-          borderTop: '1px solid rgba(229, 231, 235, 0.6)',
+          boxShadow: '0 12px 36px -4px rgba(52, 121, 137, 0.2), 0 4px 16px -2px rgba(0, 0, 0, 0.06)',
+          border: '1px solid rgba(255, 255, 255, 0.8)',
         }}
       >
-        <div ref={navRef} className="flex items-center justify-around max-w-md mx-auto relative">
+        <div ref={navRef} className="flex items-center justify-around relative">
 
-          {/* Animated Sliding Indicator */}
+          {/* Animated Sliding Highlight Pill */}
           <motion.div
-            className="absolute -top-3 h-1 rounded-full"
+            className="absolute h-10 rounded-full pointer-events-none"
             animate={{
               left: indicatorStyle.left,
               width: indicatorStyle.width,
-              background: activeColor?.gradient || navItemColors.home.gradient,
             }}
             transition={{
               type: "spring",
-              stiffness: 380,
-              damping: 30
+              stiffness: 400,
+              damping: 32
             }}
             style={{
-              boxShadow: `0 2px 12px ${activeColor?.shadow || navItemColors.home.shadow}`,
+              background: 'linear-gradient(135deg, rgba(52, 121, 137, 0.12) 0%, rgba(214, 143, 53, 0.1) 100%)',
+              border: '1px solid rgba(52, 121, 137, 0.25)',
+              top: '50%',
+              transform: 'translateY(-50%)'
             }}
           />
 
           {navItems.map((item) => {
             const IconComponent = activeTab === item.id ? item.filledIcon : item.icon;
             const isActive = activeTab === item.id;
-            const itemColor = navItemColors[item.id];
 
             return (
               <motion.button
                 key={item.id}
                 onClick={() => handleTabClick(item.path)}
-                whileTap={{ scale: 0.9 }}
-                className="flex flex-col items-center justify-center w-16 h-14 rounded-2xl transition-all duration-200 relative"
+                whileTap={{ scale: 0.88 }}
+                className="flex flex-col items-center justify-center w-14 h-11 rounded-full transition-all duration-200 relative z-10"
               >
-                {/* Active Background Glow */}
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute inset-1 rounded-xl"
-                      style={{
-                        background: itemColor.bg,
-                      }}
-                    />
-                  )}
-                </AnimatePresence>
-
-                <div className="relative z-10 flex flex-col items-center justify-center">
+                <div className="relative flex flex-col items-center justify-center">
                   <motion.div
-                    className="relative mb-1"
+                    className="relative"
                     animate={{
-                      scale: isActive ? 1.1 : 1,
-                      y: isActive ? -2 : 0
+                      scale: isActive ? 1.15 : 1,
+                      y: isActive ? -1 : 0
                     }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    transition={{ type: "spring", stiffness: 350, damping: 22 }}
                   >
                     <IconComponent
-                      className="w-6 h-6 transition-colors duration-200"
+                      className="w-5 h-5 transition-colors duration-200"
                       style={{
-                        color: isActive ? itemColor.primary : '#9CA3AF',
+                        color: isActive ? BRAND_TEAL : '#9CA3AF',
                       }}
                     />
                     {item.isCart && cartCount > 0 && (
                       <motion.span
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        className="absolute -top-1.5 -right-2.5 bg-gradient-to-br from-red-500 to-red-600 text-white text-[9px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center border-2 border-white shadow-lg"
+                        className="absolute -top-1.5 -right-2 bg-gradient-to-r from-rose-500 to-red-600 text-white text-[9px] font-extrabold rounded-full min-w-[16px] h-[16px] px-1 flex items-center justify-center border-2 border-white shadow-md"
                       >
                         {cartCount > 9 ? '9+' : cartCount}
                       </motion.span>
@@ -183,10 +168,10 @@ const BottomNav = React.memo(() => {
                   </motion.div>
                   <motion.span
                     animate={{
-                      color: isActive ? itemColor.primary : '#6B7280',
-                      fontWeight: isActive ? 600 : 500
+                      color: isActive ? BRAND_TEAL : '#6B7280',
+                      fontWeight: isActive ? 700 : 500
                     }}
-                    className="text-[10px]"
+                    className="text-[10px] tracking-tight mt-0.5"
                   >
                     {item.label}
                   </motion.span>

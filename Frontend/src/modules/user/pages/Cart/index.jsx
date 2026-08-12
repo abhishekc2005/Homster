@@ -126,25 +126,15 @@ const Cart = () => {
   }, 0);
   return (
     <div className="min-h-screen pb-32 relative bg-white">
-      {/* Refined Brand Mesh Gradient Background */}
+      {/* Refined Modern Clean Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0"
           style={{
             background: `
-              radial-gradient(at 0% 0%, ${themeColors?.brand?.teal || '#347989'}25 0%, transparent 70%),
-              radial-gradient(at 100% 0%, ${themeColors?.brand?.yellow || '#D68F35'}20 0%, transparent 70%),
-              radial-gradient(at 100% 100%, ${themeColors?.brand?.orange || '#BB5F36'}15 0%, transparent 75%),
-              radial-gradient(at 0% 100%, ${themeColors?.brand?.teal || '#347989'}10 0%, transparent 70%),
-              radial-gradient(at 50% 50%, ${themeColors?.brand?.teal || '#347989'}03 0%, transparent 100%),
-              #FFFFFF
+              radial-gradient(circle at 10% 0%, ${themeColors?.brand?.teal || '#347989'}12 0%, transparent 40%),
+              radial-gradient(circle at 90% 0%, ${themeColors?.brand?.teal || '#347989'}08 0%, transparent 40%),
+              linear-gradient(180deg, #F4FBFB 0%, #FFFFFF 35%)
             `
-          }}
-        />
-        {/* Elegant Dot Grid Pattern */}
-        <div className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: `radial-gradient(${themeColors?.brand?.teal || '#347989'} 0.8px, transparent 0.8px)`,
-            backgroundSize: '32px 32px'
           }}
         />
       </div>
@@ -294,27 +284,51 @@ const Cart = () => {
                     </div>
 
                     {/* Services List */}
-                    <div className="mb-4 space-y-2">
+                    <div className="mb-4 space-y-3 divide-y divide-gray-100">
                       {items.map((item) => (
-                        <div key={item._id || item.id} className="flex items-start justify-between py-2 border-b border-gray-100 last:border-0">
-                          <div className="flex-1">
-                            <p className="text-sm text-gray-800 font-medium">
-                              {item.title} X {item.serviceCount || 1}
+                        <div key={item._id || item.id} className="pt-3 first:pt-0 flex items-center justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-bold text-gray-900 truncate">
+                              {item.title}
                             </p>
                             {item.description && (
-                              <p className="text-xs text-gray-500 mt-0.5">{item.description}</p>
+                              <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">{item.description}</p>
                             )}
-                          </div>
-                          <div className="flex items-center gap-2 shrink-0">
-                            <span className="text-sm font-semibold text-black">
+                            <p className="text-xs font-bold text-[#347989] mt-1">
                               ₹{(item.price || 0).toLocaleString('en-IN')}
-                            </span>
-                            <button
+                            </p>
+                          </div>
+                          
+                          {/* Quantity Stepper */}
+                          <div className="flex items-center gap-2 shrink-0">
+                            <div className="flex items-center gap-1.5 bg-slate-100 rounded-xl p-1 border border-slate-200">
+                              <motion.button
+                                whileTap={{ scale: 0.85 }}
+                                onClick={() => handleQuantityChange(item._id || item.id, -1)}
+                                className="w-7 h-7 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-700 font-bold hover:bg-slate-50 active:bg-slate-100 transition-colors"
+                              >
+                                <FiMinus className="w-3.5 h-3.5" />
+                              </motion.button>
+                              <span className="w-6 text-center text-xs font-extrabold text-gray-900">
+                                {item.serviceCount || 1}
+                              </span>
+                              <motion.button
+                                whileTap={{ scale: 0.85 }}
+                                onClick={() => handleQuantityChange(item._id || item.id, 1)}
+                                className="w-7 h-7 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-700 font-bold hover:bg-slate-50 active:bg-slate-100 transition-colors"
+                              >
+                                <FiPlus className="w-3.5 h-3.5" />
+                              </motion.button>
+                            </div>
+                            
+                            <motion.button
+                              whileTap={{ scale: 0.85 }}
                               onClick={() => handleDelete(item._id || item.id)}
-                              className="p-1 hover:bg-red-50 rounded transition-colors"
+                              className="p-2 hover:bg-rose-50 text-rose-500 rounded-xl transition-colors"
+                              title="Remove item"
                             >
-                              <FiTrash2 className="w-4 h-4 text-red-500" />
-                            </button>
+                              <FiTrash2 className="w-4 h-4" />
+                            </motion.button>
                           </div>
                         </div>
                       ))}

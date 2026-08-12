@@ -192,25 +192,15 @@ const Account = () => {
 
   return (
     <div className="min-h-screen pb-32 relative bg-white">
-      {/* Refined Brand Mesh Gradient Background */}
+      {/* Refined Modern Clean Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0"
           style={{
             background: `
-              radial-gradient(at 0% 0%, ${themeColors?.brand?.teal || '#347989'}25 0%, transparent 70%),
-              radial-gradient(at 100% 0%, ${themeColors?.brand?.yellow || '#D68F35'}20 0%, transparent 70%),
-              radial-gradient(at 100% 100%, ${themeColors?.brand?.orange || '#BB5F36'}15 0%, transparent 75%),
-              radial-gradient(at 0% 100%, ${themeColors?.brand?.teal || '#347989'}10 0%, transparent 70%),
-              radial-gradient(at 50% 50%, ${themeColors?.brand?.teal || '#347989'}03 0%, transparent 100%),
-              #FFFFFF
+              radial-gradient(circle at 10% 0%, ${themeColors?.brand?.teal || '#347989'}12 0%, transparent 40%),
+              radial-gradient(circle at 90% 0%, ${themeColors?.brand?.teal || '#347989'}08 0%, transparent 40%),
+              linear-gradient(180deg, #F4FBFB 0%, #FFFFFF 35%)
             `
-          }}
-        />
-        {/* Elegant Dot Grid Pattern */}
-        <div className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: `radial-gradient(${themeColors?.brand?.teal || '#347989'} 0.8px, transparent 0.8px)`,
-            backgroundSize: '32px 32px'
           }}
         />
       </div>
@@ -439,12 +429,16 @@ const Account = () => {
             </motion.button>
             <div className="h-4"></div>
             <motion.button
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.96 }}
               onClick={handleLogout}
-              className="w-full flex items-center justify-center gap-2 p-4 bg-red-500 hover:bg-red-600 active:bg-red-700 text-white font-black uppercase tracking-wider rounded-2xl shadow-lg shadow-red-200 transition-all mb-3"
+              className="w-full flex items-center justify-center gap-2 py-3.5 px-4 text-white font-extrabold text-sm uppercase tracking-wider rounded-2xl transition-all mb-4"
+              style={{
+                background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+                boxShadow: '0 8px 24px -4px rgba(239, 68, 68, 0.35)'
+              }}
             >
               <FiLogOut className="w-5 h-5" />
-              <span>Log out</span>
+              <span>Log Out</span>
             </motion.button>
           </motion.div>
 
