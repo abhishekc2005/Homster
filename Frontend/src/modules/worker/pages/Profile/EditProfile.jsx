@@ -438,11 +438,17 @@ const EditProfile = () => {
               >
                 <div className="flex flex-wrap gap-2">
                   {formData.serviceCategories && formData.serviceCategories.length > 0 ? (
-                    formData.serviceCategories.map((cat, idx) => (
-                      <span key={idx} className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">
-                        {cat}
-                      </span>
-                    ))
+                    formData.serviceCategories.map((cat, idx) => {
+                      const catLabel = typeof cat === 'object' && cat !== null
+                        ? (cat.title || cat.name || cat.serviceName || String(cat._id || ''))
+                        : String(cat || '');
+                      if (!catLabel) return null;
+                      return (
+                        <span key={idx} className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">
+                          {catLabel}
+                        </span>
+                      );
+                    })
                   ) : (
                     <span className="text-gray-400">Select Categories</span>
                   )}

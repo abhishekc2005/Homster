@@ -39,11 +39,12 @@ const Profile = () => {
       try {
         const response = await workerAuthService.getProfile();
         if (response.success) {
-          const workerData = response.worker;
-          // Format address
-          const addressString = workerData.address
+          const workerData = response.worker || {};
+          const rawCats = workerData.serviceCategories || (workerData.serviceCategory ? [workerData.serviceCategory] : []);
+          const serviceCategories = rawCats.map(c => typeof c === 'object' && c !== null ? (c.title || c.name || c.serviceName || String(c._id || '')) : String(c || '')).filter(Boolean);
+          const addressString = typeof workerData.address === 'object' && workerData.address !== null
             ? `${workerData.address.addressLine1 || ''} ${workerData.address.addressLine2 || ''} ${workerData.address.city || ''} ${workerData.address.state || ''} ${workerData.address.pincode || ''}`.trim() || 'Not set'
-            : 'Not set';
+            : (typeof workerData.address === 'string' ? workerData.address : 'Not set');
 
           setProfile({
             name: workerData.name || 'Worker Name',
@@ -53,7 +54,7 @@ const Profile = () => {
             rating: workerData.rating || 0,
             totalJobs: workerData.totalJobs || 0,
             completedJobs: workerData.completedJobs || 0,
-            serviceCategories: workerData.serviceCategories || (workerData.serviceCategory ? [workerData.serviceCategory] : []),
+            serviceCategories,
             photo: workerData.profilePhoto || null,
             isPhoneVerified: workerData.isPhoneVerified || false,
             isEmailVerified: workerData.isEmailVerified || false
@@ -65,6 +66,8 @@ const Profile = () => {
           // Fallback to local storage if API fails
           const localWorkerData = JSON.parse(localStorage.getItem('workerData') || '{}');
           if (localWorkerData && Object.keys(localWorkerData).length > 0) {
+            const rawLocalCats = localWorkerData.serviceCategories || (localWorkerData.serviceCategory ? [localWorkerData.serviceCategory] : []);
+            const localCategories = rawLocalCats.map(c => typeof c === 'object' && c !== null ? (c.title || c.name || c.serviceName || String(c._id || '')) : String(c || '')).filter(Boolean);
             setProfile({
               name: localWorkerData.name || 'Worker Name',
               phone: localWorkerData.phone || '',
@@ -73,10 +76,10 @@ const Profile = () => {
               rating: localWorkerData.rating || 0,
               totalJobs: localWorkerData.totalJobs || 0,
               completedJobs: localWorkerData.completedJobs || 0,
-              serviceCategories: localWorkerData.serviceCategories || (localWorkerData.serviceCategory ? [localWorkerData.serviceCategory] : []),
+              serviceCategories: localCategories,
               photo: localWorkerData.profilePhoto || null
             });
-            toast('Loaded profile from local storage (API failed)');
+            toast('Loaded profile from local storage');
           }
         }
       } catch (err) {
@@ -86,6 +89,8 @@ const Profile = () => {
         // Fallback to local storage if API fails
         const localWorkerData = JSON.parse(localStorage.getItem('workerData') || '{}');
         if (localWorkerData && Object.keys(localWorkerData).length > 0) {
+          const rawLocalCats = localWorkerData.serviceCategories || (localWorkerData.serviceCategory ? [localWorkerData.serviceCategory] : []);
+          const localCategories = rawLocalCats.map(c => typeof c === 'object' && c !== null ? (c.title || c.name || c.serviceName || String(c._id || '')) : String(c || '')).filter(Boolean);
           setProfile({
             name: localWorkerData.name || 'Worker Name',
             phone: localWorkerData.phone || '',
@@ -94,10 +99,10 @@ const Profile = () => {
             rating: localWorkerData.rating || 0,
             totalJobs: localWorkerData.totalJobs || 0,
             completedJobs: localWorkerData.completedJobs || 0,
-            serviceCategories: localWorkerData.serviceCategories || (localWorkerData.serviceCategory ? [localWorkerData.serviceCategory] : []),
+            serviceCategories: localCategories,
             photo: localWorkerData.profilePhoto || null
           });
-          toast('Loaded profile from local storage (API failed)');
+          toast('Loaded profile from local storage');
         }
       } finally {
         setIsLoading(false);
@@ -270,11 +275,17 @@ const Profile = () => {
                 <p className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-1">Service Categories</p>
                 {profile.serviceCategories && profile.serviceCategories.length > 0 ? (
                   <div className="flex flex-wrap gap-2">
-                    {profile.serviceCategories.map((cat, idx) => (
-                      <span key={idx} className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-sm font-medium border border-gray-200">
-                        {cat}
-                      </span>
-                    ))}
+                    {profile.serviceCategories.map((cat, idx) => {
+                      const catText = typeof cat === 'object' && cat !== null
+                        ? (cat.title || cat.name || cat.serviceName || String(cat._id || ''))
+                        : String(cat || '');
+                      if (!catText) return null;
+                      return (
+                        <span key={idx} className="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-sm font-medium border border-gray-200">
+                          {catText}
+                        </span>
+                      );
+                    })}
                   </div>
                 ) : (
                   <p className="text-sm font-semibold text-gray-800">Not set</p>

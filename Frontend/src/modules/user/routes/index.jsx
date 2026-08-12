@@ -23,12 +23,6 @@ const lazyLoad = (importFunc) => {
               <h2 className="text-2xl font-bold text-gray-800 mb-2">Failed to load page</h2>
               <p className="text-gray-600 mb-6">Something went wrong while loading this section.</p>
               
-              <div className="bg-red-50 p-4 rounded-xl text-left border border-red-100 mb-6 max-h-40 overflow-auto">
-                <p className="text-xs font-mono text-red-600 underline mb-2">Error Details:</p>
-                <code className="text-xs text-red-700 whitespace-pre-wrap">
-                  {error?.message || 'Unknown loading error'}
-                </code>
-              </div>
 
               <div className="flex flex-col gap-3">
                 <button
