@@ -111,21 +111,19 @@ const UserScrapPage = () => {
         <div className="flex bg-white border-b border-gray-200 mt-1">
           <button
             onClick={() => setActiveTab('active')}
-            className={`flex-1 py-3 text-sm font-medium border-b-2 ${activeTab === 'active'
-              ? `border-[${themeColors.primary}] text-[${themeColors.primary}]`
-              : 'border-transparent text-gray-500'
-              }`}
-            style={{ borderColor: activeTab === 'active' ? themeColors.button : 'transparent', color: activeTab === 'active' ? themeColors.button : undefined }}
+            className={`flex-1 py-3 text-sm font-semibold border-b-2 transition-all duration-200 ${
+              activeTab === 'active' ? 'border-current' : 'border-transparent text-gray-500'
+            }`}
+            style={activeTab === 'active' ? { borderColor: themeColors.button, color: themeColors.button } : {}}
           >
             Active Listings
           </button>
           <button
             onClick={() => setActiveTab('history')}
-            className={`flex-1 py-3 text-sm font-medium border-b-2 ${activeTab === 'history'
-              ? `border-[${themeColors.primary}] text-[${themeColors.primary}]`
-              : 'border-transparent text-gray-500'
-              }`}
-            style={{ borderColor: activeTab === 'history' ? themeColors.button : 'transparent', color: activeTab === 'history' ? themeColors.button : undefined }}
+            className={`flex-1 py-3 text-sm font-semibold border-b-2 transition-all duration-200 ${
+              activeTab === 'history' ? 'border-current' : 'border-transparent text-gray-500'
+            }`}
+            style={activeTab === 'history' ? { borderColor: themeColors.button, color: themeColors.button } : {}}
           >
             History
           </button>
@@ -152,13 +150,28 @@ const UserScrapPage = () => {
               ))}
             </div>
           ) : (activeTab === 'active' ? activeScraps : historyScraps).length === 0 ? (
-            <div className="text-center py-20">
-              <div className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <FiPlus className="w-8 h-8 text-gray-400" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-20"
+            >
+              <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-5 relative">
+                <div className="absolute inset-0 rounded-full" style={{ background: `${themeColors.button}10` }} />
+                <div className="absolute inset-2 rounded-full" style={{ background: `${themeColors.button}08` }} />
+                <motion.div
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
+                >
+                  <FiTrash2 className="w-10 h-10" style={{ color: themeColors.button }} />
+                </motion.div>
               </div>
-              <p className="text-gray-500 font-medium">No items found</p>
-              <p className="text-sm text-gray-400 mt-1">Add items to start selling</p>
-            </div>
+              <p className="text-gray-800 font-bold text-lg">
+                {activeTab === 'active' ? 'No Active Listings' : 'No History Yet'}
+              </p>
+              <p className="text-sm text-gray-400 mt-1 max-w-xs mx-auto">
+                {activeTab === 'active' ? 'Tap the + button to list scrap for pickup' : 'Your completed and cancelled pickups will show here'}
+              </p>
+            </motion.div>
           ) : (
             (activeTab === 'active' ? activeScraps : historyScraps).map(item => (
               <div
@@ -217,13 +230,14 @@ const UserScrapPage = () => {
         </div>
 
         {/* FAB */}
-        <button
+        <motion.button
           onClick={() => navigate('/user/scrap/add')}
-          className="fixed bottom-24 right-4 w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-white transition-transform active:scale-95"
-          style={{ backgroundColor: themeColors.button }}
+          whileTap={{ scale: 0.9 }}
+          className="fixed bottom-24 right-4 w-14 h-14 rounded-full shadow-xl flex items-center justify-center text-white z-30"
+          style={{ background: `linear-gradient(135deg, ${themeColors.button} 0%, #2a6170 100%)`, boxShadow: `0 6px 20px -4px ${themeColors.button}60` }}
         >
           <FiPlus className="w-7 h-7" />
-        </button>
+        </motion.button>
 
         {/* Add Modal */}
 

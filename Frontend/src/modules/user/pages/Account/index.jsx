@@ -136,6 +136,7 @@ const Account = () => {
   const MenuItem = ({ icon: Icon, label, onClick, color = "text-gray-900", badge }) => (
     <motion.button
       whileTap={{ scale: 0.98 }}
+      whileHover={{ x: 3 }}
       onClick={onClick}
       className="w-full flex items-center justify-between p-4 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all group mb-3"
       style={{ '--hover-border': `${themeColors.brand.teal}30` }}
@@ -251,7 +252,7 @@ const Account = () => {
 
             <div className="flex items-center gap-4 relative z-10">
               <div className="relative">
-                <div className="w-20 h-20 rounded-2xl p-1 bg-white shadow-xl rotate-2">
+                <div className="w-20 h-20 rounded-2xl p-1 shadow-xl rotate-2" style={{ background: themeColors.gradient }}>
                   {userProfile.profilePhoto ? (
                     <img
                       src={userProfile.profilePhoto}
@@ -351,11 +352,12 @@ const Account = () => {
             </button>
             <button
               onClick={() => navigate('/user/rewards')}
-              className="bg-gray-900 p-4 rounded-3xl shadow-lg shadow-gray-200 hover:shadow-xl transition-all text-left relative overflow-hidden group"
+              className="p-4 rounded-3xl shadow-lg hover:shadow-xl transition-all text-left relative overflow-hidden group"
+              style={{ background: `linear-gradient(135deg, #1a3a42 0%, ${themeColors.brand.teal} 100%)`, boxShadow: `0 8px 24px -8px ${themeColors.brand.teal}40` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black opacity-50"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
               <div className="relative z-10 h-full flex flex-col justify-between">
-                <div className="w-10 h-10 bg-white/10 text-yellow-400 rounded-2xl flex items-center justify-center mb-3 backdrop-blur-sm group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 bg-white/15 text-yellow-400 rounded-2xl flex items-center justify-center mb-3 backdrop-blur-sm group-hover:scale-110 transition-transform">
                   <FiGift className="w-5 h-5" />
                 </div>
                 <div>

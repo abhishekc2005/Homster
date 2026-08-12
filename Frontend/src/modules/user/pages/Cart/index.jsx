@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft, FiShoppingCart, FiTrash2, FiPlus, FiMinus, FiLoader, FiBell } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import { themeColors } from '../../../../theme';
 import BottomNav from '../../components/layout/BottomNav';
@@ -199,11 +200,31 @@ const Cart = () => {
               ))}
             </div>
           ) : cartItems.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20">
-              <FiShoppingCart className="w-16 h-16 text-gray-300 mb-4" />
-              <p className="text-gray-500 text-lg font-medium">Your cart is empty</p>
-              <p className="text-gray-400 text-sm mt-2">Add services to get started</p>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex flex-col items-center justify-center py-20"
+            >
+              <div className="w-28 h-28 rounded-full flex items-center justify-center mb-6 relative">
+                <div className="absolute inset-0 rounded-full" style={{ background: `${themeColors.button}10` }} />
+                <div className="absolute inset-3 rounded-full" style={{ background: `${themeColors.button}08` }} />
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
+                >
+                  <FiShoppingCart className="w-12 h-12" style={{ color: themeColors.button }} />
+                </motion.div>
+              </div>
+              <p className="text-gray-900 text-lg font-bold">Your Cart is Empty</p>
+              <p className="text-gray-400 text-sm mt-2 max-w-xs text-center">Browse our services and add items to your cart to get started</p>
+              <button
+                onClick={() => navigate('/user')}
+                className="mt-6 px-6 py-3 rounded-xl text-white font-bold text-sm transition-all active:scale-95 shadow-lg"
+                style={{ background: themeColors.button, boxShadow: `0 4px 14px -3px ${themeColors.button}50` }}
+              >
+                Browse Services
+              </button>
+            </motion.div>
           ) : (
             <div className="space-y-4">
               {Object.entries(groupedItems).map(([category, items]) => {

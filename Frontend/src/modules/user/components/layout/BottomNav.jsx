@@ -5,37 +5,38 @@ import { HiHome, HiGift, HiShoppingCart, HiUser, HiTrash, HiCalendar } from 'rea
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../../../../context/CartContext';
 
-// Colorful theme for each nav item
+// Unified brand teal theme for all nav items
+const BRAND_TEAL = '#347989';
 const navItemColors = {
   home: {
-    primary: '#3B82F6', // Blue
-    gradient: 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)',
-    bg: 'rgba(59, 130, 246, 0.1)',
-    shadow: 'rgba(59, 130, 246, 0.4)'
+    primary: BRAND_TEAL,
+    gradient: `linear-gradient(135deg, ${BRAND_TEAL} 0%, #2a6170 100%)`,
+    bg: 'rgba(52, 121, 137, 0.1)',
+    shadow: 'rgba(52, 121, 137, 0.4)'
   },
   bookings: {
-    primary: '#10B981', // Emerald
-    gradient: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
-    bg: 'rgba(16, 185, 129, 0.1)',
-    shadow: 'rgba(16, 185, 129, 0.4)'
+    primary: BRAND_TEAL,
+    gradient: `linear-gradient(135deg, ${BRAND_TEAL} 0%, #2a6170 100%)`,
+    bg: 'rgba(52, 121, 137, 0.1)',
+    shadow: 'rgba(52, 121, 137, 0.4)'
   },
   scrap: {
-    primary: '#F59E0B', // Amber
-    gradient: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
-    bg: 'rgba(245, 158, 11, 0.1)',
-    shadow: 'rgba(245, 158, 11, 0.4)'
+    primary: BRAND_TEAL,
+    gradient: `linear-gradient(135deg, ${BRAND_TEAL} 0%, #2a6170 100%)`,
+    bg: 'rgba(52, 121, 137, 0.1)',
+    shadow: 'rgba(52, 121, 137, 0.4)'
   },
   cart: {
-    primary: '#EC4899', // Pink
-    gradient: 'linear-gradient(135deg, #EC4899 0%, #DB2777 100%)',
-    bg: 'rgba(236, 72, 153, 0.1)',
-    shadow: 'rgba(236, 72, 153, 0.4)'
+    primary: BRAND_TEAL,
+    gradient: `linear-gradient(135deg, ${BRAND_TEAL} 0%, #2a6170 100%)`,
+    bg: 'rgba(52, 121, 137, 0.1)',
+    shadow: 'rgba(52, 121, 137, 0.4)'
   },
   account: {
-    primary: '#8B5CF6', // Violet
-    gradient: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)',
-    bg: 'rgba(139, 92, 246, 0.1)',
-    shadow: 'rgba(139, 92, 246, 0.4)'
+    primary: BRAND_TEAL,
+    gradient: `linear-gradient(135deg, ${BRAND_TEAL} 0%, #2a6170 100%)`,
+    bg: 'rgba(52, 121, 137, 0.1)',
+    shadow: 'rgba(52, 121, 137, 0.4)'
   }
 };
 

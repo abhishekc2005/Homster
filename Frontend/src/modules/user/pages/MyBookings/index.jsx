@@ -207,10 +207,10 @@ const MyBookings = () => {
                 key={tab.id}
                 onClick={() => setFilter(tab.id)}
                 className={`px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-200 border ${filter === tab.id
-                  ? 'border-transparent text-white shadow-lg shadow-blue-500/25 active:scale-95'
+                  ? 'border-transparent text-white active:scale-95'
                   : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 hover:border-slate-300'
                   }`}
-                style={filter === tab.id ? { backgroundColor: themeColors.button } : {}}
+                style={filter === tab.id ? { backgroundColor: themeColors.button, boxShadow: `0 4px 14px -3px ${themeColors.button}40` } : {}}
               >
                 {tab.label}
               </button>
@@ -257,17 +257,33 @@ const MyBookings = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="flex flex-col items-center justify-center py-24 text-center px-6"
+              className="flex flex-col items-center justify-center py-20 text-center px-6"
             >
-              <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-6 border border-slate-100 shadow-sm">
-                <FiClock className="w-8 h-8 text-slate-300" />
+              <div className="w-24 h-24 rounded-full flex items-center justify-center mb-6 relative">
+                <div className="absolute inset-0 rounded-full" style={{ background: `${themeColors.button}10` }} />
+                <div className="absolute inset-2 rounded-full" style={{ background: `${themeColors.button}08` }} />
+                <motion.div
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
+                >
+                  <FiCalendar className="w-10 h-10" style={{ color: themeColors.button }} />
+                </motion.div>
               </div>
-              <h3 className="text-slate-900 text-lg font-bold mb-2">No Bookings Found</h3>
-              <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
+              <h3 className="text-slate-900 text-lg font-bold mb-2">
+                {filter === 'all' ? 'No Bookings Yet' : `No ${filter.replace('-', ' ')} Bookings`}
+              </h3>
+              <p className="text-slate-500 text-sm max-w-xs leading-relaxed mb-6">
                 {filter === 'all'
-                  ? "Looks like you haven't booked any services yet. Explore our services to get started!"
+                  ? "Your booking history will appear here. Book a service to get started!"
                   : `You don't have any ${filter.replace('-', ' ')} bookings at the moment.`}
               </p>
+              <button
+                onClick={() => navigate('/user')}
+                className="px-6 py-3 rounded-xl text-white font-bold text-sm transition-all active:scale-95 shadow-lg"
+                style={{ background: themeColors.button, boxShadow: `0 4px 14px -3px ${themeColors.button}50` }}
+              >
+                Browse Services
+              </button>
             </motion.div>
           ) : (
             <motion.div
@@ -294,7 +310,7 @@ const MyBookings = () => {
                     }
                   }}
                   onClick={() => handleBookingClick(booking)}
-                  className={`group relative bg-white rounded-2xl p-5 border border-slate-200 border-l-4 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_-8px_rgba(0,0,0,0.08)] hover:border-blue-300 active:scale-[0.99] transition-all duration-300 cursor-pointer overflow-hidden ${getStatusBorderColor(booking.status)}`}
+                  className={`group relative bg-white rounded-2xl p-5 border border-slate-200 border-l-4 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_-8px_rgba(0,0,0,0.08)] active:scale-[0.99] transition-all duration-300 cursor-pointer overflow-hidden ${getStatusBorderColor(booking.status)}`}
                 >
                   {/* Decorative Elements */}
                   <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-slate-50 via-transparent to-transparent -z-0 opacity-50" />
@@ -324,7 +340,7 @@ const MyBookings = () => {
                         )}
 
                         {/* 3. Service Name */}
-                        <h3 className="text-lg font-bold text-slate-800 leading-tight line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        <h3 className="text-lg font-bold text-slate-800 leading-tight line-clamp-2 transition-colors" style={{ '--tw-group-hover-color': themeColors.button }}>
                           {booking.serviceName || 'Service Request'}
                         </h3>
 
@@ -384,7 +400,8 @@ const MyBookings = () => {
                     </div>
 
                     <button
-                      className="flex items-center gap-1.5 pl-4 pr-3 py-2 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600 font-bold text-sm hover:bg-indigo-600 hover:border-indigo-600 hover:text-white transition-all shadow-sm active:scale-95"
+                      className="flex items-center gap-1.5 pl-4 pr-3 py-2 rounded-lg font-bold text-sm transition-all shadow-sm active:scale-95"
+                      style={{ background: `${themeColors.button}12`, border: `1px solid ${themeColors.button}25`, color: themeColors.button }}
                     >
                       View Details
                       <FiChevronRight className="w-4 h-4" />
