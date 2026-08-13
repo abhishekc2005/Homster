@@ -146,10 +146,24 @@ const addWorker = async (req, res) => {
       data: worker
     });
   } catch (error) {
-    console.error('Add worker error:', error);
+    console.error('Add worker error:', error.message || error);
+    console.error('Add worker error stack:', error.stack);
+    console.error('Add worker error code:', error.code);
+    if (error.keyPattern) console.error('Duplicate key:', error.keyPattern);
+    
+    // Return detailed error for debugging
+    let message = 'Failed to add worker. Please try again.';
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyPattern || {})[0] || 'unknown';
+      message = `A worker with this ${field} already exists.`;
+    } else if (error.name === 'ValidationError') {
+      message = Object.values(error.errors).map(e => e.message).join(', ');
+    }
+    
     res.status(500).json({
       success: false,
-      message: 'Failed to add worker. Please try again.'
+      message,
+      ...(process.env.NODE_ENV !== 'production' && { debug: { errorMessage: error.message, code: error.code, keyPattern: error.keyPattern } })
     });
   }
 };
