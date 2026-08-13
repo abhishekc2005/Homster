@@ -1,8 +1,10 @@
 ﻿# Environment variables (never commit .env files with real credentials)
-.env
-.env.local
-.env.production
 .env.*.local
 
 # Misc
 homster.json
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+config.bat
+node_modules
