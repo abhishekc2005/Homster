@@ -71,7 +71,8 @@ const addWorker = async (req, res) => {
       phone,
       aadhar,
       serviceCategories,
-      address
+      address,
+      profilePhoto
     } = req.body;
 
     // Upload Aadhar document to Cloudinary if it's a base64 string
@@ -79,6 +80,13 @@ const addWorker = async (req, res) => {
     if (aadharUrl && aadharUrl.startsWith('data:')) {
       const uploadRes = await cloudinaryService.uploadFile(aadharUrl, { folder: 'workers/documents' });
       if (uploadRes.success) aadharUrl = uploadRes.url;
+    }
+
+    // Upload profile photo to Cloudinary if it's a base64 string
+    let photoUrl = profilePhoto || null;
+    if (photoUrl && photoUrl.startsWith('data:')) {
+      const uploadRes = await cloudinaryService.uploadFile(photoUrl, { folder: 'workers/profiles' });
+      if (uploadRes.success) photoUrl = uploadRes.url;
     }
 
     // Check if worker already exists
@@ -89,7 +97,7 @@ const addWorker = async (req, res) => {
       if (!worker.vendorId) {
         worker.vendorId = vendorId;
         worker.name = name;
-        worker.email = email;
+        worker.email = email || null;
         if (aadhar) {
           worker.aadhar = {
             number: aadhar.number,
@@ -98,6 +106,7 @@ const addWorker = async (req, res) => {
         }
         if (serviceCategories) worker.serviceCategories = serviceCategories;
         if (address) worker.address = address;
+        if (photoUrl) worker.profilePhoto = photoUrl;
         worker.status = WORKER_STATUS.ACTIVE;
 
         await worker.save();
@@ -125,6 +134,7 @@ const addWorker = async (req, res) => {
         document: aadharUrl
       },
       vendorId,
+      profilePhoto: photoUrl,
       serviceCategories: serviceCategories || [],
       address: address || {},
       status: WORKER_STATUS.ACTIVE

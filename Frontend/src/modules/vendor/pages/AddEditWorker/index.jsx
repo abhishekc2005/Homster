@@ -9,6 +9,7 @@ import { createWorker, updateWorker, getWorkerById, linkWorker } from '../../ser
 import { publicCatalogService } from '../../../../services/catalogService';
 import { toast } from 'react-hot-toast';
 import { z } from "zod";
+import api from '../../../../services/api';
 
 // Zod schemas
 const addWorkerSchema = z.object({
@@ -133,28 +134,17 @@ const AddEditWorker = () => {
     initData();
   }, [id, isEdit]);
 
-  // Upload file helper
+  // Upload file helper — uses authenticated axios instance
   const uploadFile = async (file) => {
-    const formData = new FormData();
-    formData.append('file', file);
+    const uploadData = new FormData();
+    uploadData.append('file', file);
 
-    let baseUrl = import.meta.env.VITE_API_BASE_URL || '';
-    if (!baseUrl) {
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        baseUrl = 'http://localhost:5000';
-      } else {
-        baseUrl = window.location.origin;
-      }
-    }
-    baseUrl = baseUrl.replace(/\/api$/, '');
-    const response = await fetch(`${baseUrl}/api/image/upload`, {
-      method: 'POST',
-      body: formData,
+    const response = await api.post('/image/upload', uploadData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
     });
 
-    const data = await response.json();
-    if (!data.success) throw new Error(data.message || 'Upload failed');
-    return data.imageUrl;
+    if (!response.data.success) throw new Error(response.data.message || 'Upload failed');
+    return response.data.imageUrl;
   };
 
   const handlePhotoChange = (e) => {
@@ -297,21 +287,16 @@ const AddEditWorker = () => {
         }
       }
 
-      // Clean payload
+      // Clean payload — sanitize email before sending
       const payload = {
         ...formData,
-        profilePhoto: photoUrl,
+        email: formData.email?.trim() || null, // Prevent MongoDB E11000 duplicate key on empty string
+        profilePhoto: photoUrl || null,
         aadhar: {
           ...formData.aadhar,
-          document: aadharUrl || 'pending_upload' // Ensure strictly that we have something
+          document: aadharUrl || 'pending_upload'
         }
       };
-
-      if (!payload.aadhar.document && !isEdit) {
-        // Should have been caught by validation, but double check
-        // If still empty and no file, maybe error?
-        // For now let backend handle it or user re-try
-      }
 
       if (isEdit) {
         await updateWorker(id, payload);
